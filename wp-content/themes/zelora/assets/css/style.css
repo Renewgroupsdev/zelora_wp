@@ -1484,6 +1484,29 @@ select {
     box-shadow: 0 30px 80px #0003;
     backdrop-filter: blur(15px)
 }
+.contact-message {
+    margin-top: 15px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.contact-message.success {
+    color: #198754;
+    background: rgba(25, 135, 84, 0.1);
+    border: 1px solid rgba(25, 135, 84, 0.25);
+}
+
+.contact-message.error {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.25);
+}
+
+#contactSubmitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
 
 .row {
     display: grid;

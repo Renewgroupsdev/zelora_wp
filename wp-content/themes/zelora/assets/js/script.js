@@ -130,14 +130,6 @@ $(function(){
     $(this).addClass('focus');
   }).on('mouseleave',function(){ $(this).removeClass('focus'); });
 
-  // Demo form interaction.
-  $('#contactForm').on('submit',function(e){
-    e.preventDefault();
-    const $form=$(this), $btn=$form.find('button[type=submit]'), old=$btn.html();
-    $btn.html('Sending...').prop('disabled',true);
-    $.ajax({url:(window.ZeloraTheme&&ZeloraTheme.ajaxUrl)||'',type:'POST',data:$form.serialize()+'&action=zelora_contact_submit',success:function(r){if(r&&r.success){$btn.html('Message sent <b>✓</b>');$form[0].reset();}else{$btn.html((r&&r.data&&r.data.message)||'Unable to send');}},error:function(){$btn.html('Unable to send');},complete:function(){setTimeout(function(){$btn.html(old).prop('disabled',false);},2400);}});
-  });
-
   // jQuery smooth anchor movement.
   $('a[href^="#"]').on('click',function(e){
     const id=$(this).attr('href');
@@ -181,4 +173,122 @@ $(function(){
     $('.hero-orbit-2').css('transform','rotate(18deg) translate3d(0,'+(y*.035)+'px,0)');
     $('.process-bg').css('transform','translate3d(0,'+(y*.025)+'px,0)');
   });
+
+  $(document)
+    .off('submit.zeloraContact', '#contactForm')
+    .on('submit.zeloraContact', '#contactForm', function (e) {
+
+        e.preventDefault();
+
+        const $form = $(this);
+        const $button = $('#contactSubmitBtn');
+        const $btnText = $button.find('.btn-text');
+        const $btnLoading = $button.find('.btn-loading');
+        const $message = $('#contactMessage');
+
+        /*
+         * Clear previous message
+         */
+        $message
+            .hide()
+            .removeClass('success error')
+            .html('');
+
+        /*
+         * Disable submit button
+         */
+        $button.prop('disabled', true);
+
+        $btnText.hide();
+        $btnLoading.show();
+
+        /*
+         * Get form data
+         */
+        const formData = new FormData($form[0]);
+
+        /*
+         * WordPress AJAX action
+         */
+        formData.append(
+            'action',
+            'zelora_contact_submit'
+        );
+
+        /*
+         * Send AJAX request
+         */
+        $.ajax({
+            url: ZeloraTheme.ajaxUrl,
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+
+            success: function (response) {
+
+                if (response.success) {
+
+                    /*
+                     * Success message
+                     */
+                    $message
+                        .removeClass('error')
+                        .addClass('success')
+                        .html(
+                            response.data.message ||
+                            'Your message has been sent successfully.'
+                        )
+                        .fadeIn();
+
+                    /*
+                     * Reset form
+                     */
+                    $form[0].reset();
+
+                } else {
+
+                    /*
+                     * Server-side validation error
+                     */
+                    $message
+                        .removeClass('success')
+                        .addClass('error')
+                        .html(
+                            response.data?.message ||
+                            'Unable to send your message.'
+                        )
+                        .fadeIn();
+                }
+            },
+
+            error: function (xhr, status, error) {
+
+                console.error(
+                    'Zelora contact form error:',
+                    error
+                );
+
+                $message
+                    .removeClass('success')
+                    .addClass('error')
+                    .html(
+                        'Something went wrong. Please try again later.'
+                    )
+                    .fadeIn();
+            },
+
+            complete: function () {
+
+                /*
+                 * Enable button
+                 */
+                $button.prop('disabled', false);
+
+                $btnText.show();
+                $btnLoading.hide();
+            }
+        });
+
+    });
 });

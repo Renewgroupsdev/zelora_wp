@@ -336,7 +336,113 @@
         </div>
         <p class="contact-footnote"><?php echo wp_kses_post(zelora_mod('footnote')); ?></p>
       </div>
-      <form class="contact-card reveal" id="contactForm"><input type="hidden" name="nonce"
+      <form class="contact-card reveal" id="contactForm">
+
+        <input
+            type="hidden"
+            name="nonce"
+            value="<?php echo esc_attr(wp_create_nonce('zelora_contact_nonce')); ?>"
+        >
+
+        <div class="row">
+            <label>
+                Full name*
+                <input
+                    required
+                    name="name"
+                    placeholder="Your name"
+                >
+            </label>
+
+            <label>
+                Company name
+                <input
+                    name="company"
+                    placeholder="Company"
+                >
+            </label>
+        </div>
+
+        <div class="row">
+            <label>
+                Work email*
+                <input
+                    required
+                    type="email"
+                    name="email"
+                    placeholder="you@company.com"
+                >
+            </label>
+
+            <label>
+                Phone number
+                <input
+                    name="phone"
+                    placeholder="+91"
+                >
+            </label>
+        </div>
+
+        <label>
+            What are you interested in?
+
+            <select name="interest">
+                <option value="<?php echo esc_attr(zelora_mod('interest1')); ?>">
+                    <?php echo esc_html(zelora_mod('interest1')); ?>
+                </option>
+
+                <option value="<?php echo esc_attr(zelora_mod('interest2')); ?>">
+                    <?php echo esc_html(zelora_mod('interest2')); ?>
+                </option>
+
+                <option value="<?php echo esc_attr(zelora_mod('interest3')); ?>">
+                    <?php echo esc_html(zelora_mod('interest3')); ?>
+                </option>
+
+                <option value="<?php echo esc_attr(zelora_mod('interest4')); ?>">
+                    <?php echo esc_html(zelora_mod('interest4')); ?>
+                </option>
+
+                <option value="<?php echo esc_attr(zelora_mod('interest5')); ?>">
+                    <?php echo esc_html(zelora_mod('interest5')); ?>
+                </option>
+            </select>
+        </label>
+
+        <label>
+            Tell us a little more...
+
+            <textarea
+                name="message"
+                rows="5"
+                placeholder="Tell us about your requirement"
+            ></textarea>
+        </label>
+
+        <button
+            class="btn btn-gold magnetic"
+            type="submit"
+            id="contactSubmitBtn"
+        >
+            <span class="btn-text">Send message</span>
+            <span class="btn-loading" style="display:none;">
+                Sending...
+            </span>
+            <b>→</b>
+        </button>
+
+        <div
+            id="contactMessage"
+            class="contact-message"
+            style="display:none;"
+        ></div>
+
+        <small>
+            <?php echo wp_kses_post(zelora_mod('form_note')); ?>
+        </small>
+
+    </form>
+      <!-- <form class="contact-card reveal" id="contactForm"><input type="hidden" name="nonce"
           value="<?php echo esc_attr(wp_create_nonce('zelora_contact_nonce')); ?>">
         <div class="row"><label>Full name*<input required name="name" placeholder="Your name"></label><label>Company
             name<input name="company" placeholder="Company"></label></div>
@@ -354,7 +460,7 @@
             placeholder="Tell us about your requirement"></textarea></label>
         <button class="btn btn-gold magnetic" type="submit">Send message <b>→</b></button>
         <small><?php echo wp_kses_post(zelora_mod('form_note')); ?></small>
-      </form>
+      </form> -->
     </div>
   </section>
 </main>

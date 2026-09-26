@@ -79,7 +79,7 @@ function zelora_defaults()
         'footer_logo' => 'images/zelora-logo.png',
         'hero_image' => 'images/hero-dashboard.png',
         'about_image' => 'images/about.png',
-        'favicon'     => 'images/zelora-logo',
+        'favicon' => 'images/zelora-logo',
         'service1_title' => 'ERP Development',
         'service1_desc' => 'Build a stronger operational foundation.',
         'service1_url' => '#contact',
@@ -207,23 +207,267 @@ function zelora_menu_attrs($atts, $item, $args)
     return $atts;
 }
 add_filter('nav_menu_link_attributes', 'zelora_menu_attrs', 10, 3);
+
+function zelora_load_email_template($template, $data = array())
+{
+    $template_path = trailingslashit(get_template_directory()) .
+        'emailtemplates/' . $template . '.html';
+
+    // Check if file exists
+    if (!file_exists($template_path)) {
+        error_log('Zelora Email Template NOT FOUND: ' . $template_path);
+        return false;
+    }
+
+    // Check if file is readable
+    if (!is_readable($template_path)) {
+        error_log('Zelora Email Template NOT READABLE: ' . $template_path);
+        return false;
+    }
+
+    $html = file_get_contents($template_path);
+
+    if ($html === false || trim($html) === '') {
+        error_log('Zelora Email Template EMPTY: ' . $template_path);
+        return false;
+    }
+
+    // Replace placeholders
+    foreach ($data as $key => $value) {
+        $html = str_replace(
+            '{{' . $key . '}}',
+            $value,
+            $html
+        );
+    }
+
+    return $html;
+}
 function zelora_contact_submit()
 {
+    error_log(
+        'ZELORA CONTACT SUBMIT CALLED - ' . current_time('mysql')
+    );
     check_ajax_referer('zelora_contact_nonce', 'nonce');
-    $name = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
-    $company = sanitize_text_field(wp_unslash($_POST['company'] ?? ''));
-    $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
-    $phone = sanitize_text_field(wp_unslash($_POST['phone'] ?? ''));
-    $interest = sanitize_text_field(wp_unslash($_POST['interest'] ?? ''));
-    $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
-    if (!$name || !is_email($email))
-        wp_send_json_error(array('message' => 'Please enter a valid name and email.'));
-    $body = "Name: $name\nCompany: $company\nEmail: $email\nPhone: $phone\nInterest: $interest\n\nMessage:\n$message";
-    wp_mail(get_option('admin_email'), 'New Zelora website enquiry', $body, array('Reply-To: ' . $email));
-    wp_send_json_success(array('message' => 'Message sent'));
+
+    $name = sanitize_text_field(
+        wp_unslash($_POST['name'] ?? '')
+    );
+
+    $company = sanitize_text_field(
+        wp_unslash($_POST['company'] ?? '')
+    );
+
+    $email = sanitize_email(
+        wp_unslash($_POST['email'] ?? '')
+    );
+
+    $phone = sanitize_text_field(
+        wp_unslash($_POST['phone'] ?? '')
+    );
+
+    $interest = sanitize_text_field(
+        wp_unslash($_POST['interest'] ?? '')
+    );
+
+    $message = sanitize_textarea_field(
+        wp_unslash($_POST['message'] ?? '')
+    );
+
+
+    /*
+     * Validation
+     */
+    if (empty($name)) {
+        wp_send_json_error([
+            'message' => 'Please enter your name.'
+        ]);
+    }
+
+    if (!is_email($email)) {
+        wp_send_json_error([
+            'message' => 'Please enter a valid email address.'
+        ]);
+    }
+
+    if (empty($message)) {
+        wp_send_json_error([
+            'message' => 'Please enter your message.'
+        ]);
+    }
+
+
+    /*
+     * Logo
+     */
+    $logo_url = zelora_image(
+        'header_logo',
+        'images/zelora-logo.png'
+    );
+
+
+    /*
+     * Logo HTML
+     */
+    $logo_html = '';
+
+    if (!empty($logo_url)) {
+        $logo_html = '
+            <img
+                src="' . esc_url($logo_url) . '"
+                alt="Zelora Infotech"
+                style="
+                    max-width:180px;
+                    max-height:60px;
+                    display:inline-block;
+                    margin-bottom:20px;
+                "
+            >
+        ';
+    }
+
+
+    /*
+     * Email template data
+     */
+    $template_data = array(
+
+        'logo' => $logo_html,
+
+        'name' => esc_html($name),
+
+        'company' => esc_html(
+            $company ?: '—'
+        ),
+
+        'email' => esc_html($email),
+
+        'phone' => esc_html(
+            $phone ?: '—'
+        ),
+
+        'interest' => esc_html(
+            $interest ?: '—'
+        ),
+
+        'message' => nl2br(
+            esc_html($message)
+        ),
+    );
+
+
+    /*
+     * Load HTML email template
+     */
+    $body = zelora_load_email_template(
+        'contact-enquiry',
+        $template_data
+    );
+
+
+    /*
+     * Check template
+     */
+    if ($body === false) {
+
+        wp_send_json_error([
+            'message' => 'Email template could not be loaded.'
+        ]);
+    }
+
+
+    /*
+     * Recipient
+     *
+     * This uses the WordPress admin email.
+     */
+    $to = get_option('admin_email');
+
+
+    /*
+     * Email subject
+     */
+    $subject = 'New Website Enquiry for '. $interest .' - Zelora Infotech';
+
+
+//     /*
+//      * Email body
+//      */
+//     $body = "New enquiry received from the Zelora website.\n\n";
+
+//     $body .= "----------------------------------------\n";
+//     $body .= "CONTACT DETAILS\n";
+//     $body .= "----------------------------------------\n\n";
+
+//     $body .= "Name: " . $name . "\n";
+//     $body .= "Company: " . ($company ?: 'Not provided') . "\n";
+//     $body .= "Email: " . $email . "\n";
+//     $body .= "Phone: " . ($phone ?: 'Not provided') . "\n";
+//     $body .= "Interest: " . ($interest ?: 'Not selected') . "\n\n";
+
+//     $body .= "----------------------------------------\n";
+//     $body .= "MESSAGE\n";
+//     $body .= "----------------------------------------\n\n";
+
+//     $body .= ($message ?: 'No message provided') . "\n\n";
+
+//     $body .= "----------------------------------------\n";
+//     $body .= "Website: " . home_url('/') . "\n";
+//     $body .= "Submitted: " . current_time('mysql') . "\n";
+//     $body .= "----------------------------------------\n";
+
+
+    /*
+     * Email headers
+     *
+     * IMPORTANT:
+     * Use your own website domain as From.
+     * Do not use the visitor's email as From.
+     */
+    $headers = array(
+        'Content-Type: text/html; charset=UTF-8',
+        'From: Zelora Website <info@zelorainfotech.com>',
+        'Reply-To: ' . $name . ' <' . $email . '>',
+    );
+
+
+    /*
+     * Send email
+     */
+    $sent = wp_mail(
+        $to,
+        $subject,
+        $body,
+        $headers
+    );
+
+
+    /*
+     * Response
+     */
+    if (!$sent) {
+
+        wp_send_json_error(array(
+            'message' => 'Unable to send your message right now. Please try again later.'
+        ));
+    }
+
+
+    wp_send_json_success(array(
+        'message' => 'Thank you! Your enquiry has been sent successfully. Our team will get back to you shortly.'
+    ));
 }
-add_action('wp_ajax_zelora_contact_submit', 'zelora_contact_submit');
-add_action('wp_ajax_nopriv_zelora_contact_submit', 'zelora_contact_submit');
+
+add_action(
+    'wp_ajax_zelora_contact_submit',
+    'zelora_contact_submit'
+);
+
+add_action(
+    'wp_ajax_nopriv_zelora_contact_submit',
+    'zelora_contact_submit'
+);
+
 function zelora_customizer($c)
 {
     $d = zelora_defaults();
@@ -232,8 +476,8 @@ function zelora_customizer($c)
      * Main Customizer Panel
      */
     $c->add_panel('zelora_home', array(
-        'title'       => 'Zelora Homepage',
-        'priority'    => 10,
+        'title' => 'Zelora Homepage',
+        'priority' => 10,
         'description' => 'Edit homepage content, images and URLs. Changes are saved in the WordPress database.',
     ));
 
@@ -241,16 +485,16 @@ function zelora_customizer($c)
      * Sections
      */
     $sections = array(
-        'navigation'    => 'Navigation / URLs',
-        'hero'          => 'Hero',
+        'navigation' => 'Navigation / URLs',
+        'hero' => 'Hero',
         'hero_services' => 'Hero Service Bar',
-        'about'         => 'About',
-        'services'      => 'Services',
-        'process'       => 'How We Work',
-        'industries'    => 'Industries',
-        'contact'       => 'Contact',
-        'footer'        => 'Footer',
-        'images'        => 'Images',
+        'about' => 'About',
+        'services' => 'Services',
+        'process' => 'How We Work',
+        'industries' => 'Industries',
+        'contact' => 'Contact',
+        'footer' => 'Footer',
+        'images' => 'Images',
     );
 
     foreach ($sections as $id => $title) {
@@ -283,9 +527,9 @@ function zelora_customizer($c)
          * Register setting
          */
         $c->add_setting('zelora_' . $k, array(
-            'default'           => $d[$k] ?? '',
+            'default' => $d[$k] ?? '',
             'sanitize_callback' => $sanitize,
-            'transport'         => 'refresh',
+            'transport' => 'refresh',
         ));
 
         /*
@@ -298,9 +542,9 @@ function zelora_customizer($c)
                     $c,
                     'zelora_' . $k,
                     array(
-                        'label'       => $label,
-                        'section'     => 'zelora_' . $section,
-                        'mime_type'   => 'image',
+                        'label' => $label,
+                        'section' => 'zelora_' . $section,
+                        'mime_type' => 'image',
                         'description' => 'Upload or select an image from the Media Library.',
                     )
                 )
@@ -312,9 +556,9 @@ function zelora_customizer($c)
              * Normal text / URL / textarea control
              */
             $c->add_control('zelora_' . $k, array(
-                'label'   => $label,
+                'label' => $label,
                 'section' => 'zelora_' . $section,
-                'type'    => $type,
+                'type' => $type,
             ));
         }
     };
@@ -326,12 +570,12 @@ function zelora_customizer($c)
      * ---------------------------------------------------------
      */
     $urls = array(
-        'home_url'       => 'Home URL',
-        'about_url'      => 'About URL',
-        'services_url'   => 'Services URL',
-        'process_url'    => 'How We Work URL',
+        'home_url' => 'Home URL',
+        'about_url' => 'About URL',
+        'services_url' => 'Services URL',
+        'process_url' => 'How We Work URL',
         'industries_url' => 'Industries URL',
-        'contact_url'    => 'Contact URL',
+        'contact_url' => 'Contact URL',
     );
 
     foreach ($urls as $k => $l) {
@@ -345,25 +589,25 @@ function zelora_customizer($c)
      * ---------------------------------------------------------
      */
     $hero_fields = array(
-        'hero_eyebrow'       => 'Eyebrow',
-        'hero_title'         => 'Title (HTML allowed)',
-        'hero_desc'          => 'Description',
-        'hero_primary_text'  => 'Primary button text',
-        'hero_primary_url'   => 'Primary button URL',
-        'hero_secondary_text'=> 'Secondary button text',
+        'hero_eyebrow' => 'Eyebrow',
+        'hero_title' => 'Title (HTML allowed)',
+        'hero_desc' => 'Description',
+        'hero_primary_text' => 'Primary button text',
+        'hero_primary_url' => 'Primary button URL',
+        'hero_secondary_text' => 'Secondary button text',
         'hero_secondary_url' => 'Secondary button URL',
 
-        'kpi1'       => 'KPI 1 value',
+        'kpi1' => 'KPI 1 value',
         'kpi1_label' => 'KPI 1 label',
-        'kpi1_url'   => 'KPI 1 URL',
+        'kpi1_url' => 'KPI 1 URL',
 
-        'kpi2'       => 'KPI 2 value',
+        'kpi2' => 'KPI 2 value',
         'kpi2_label' => 'KPI 2 label',
-        'kpi2_url'   => 'KPI 2 URL',
+        'kpi2_url' => 'KPI 2 URL',
 
-        'kpi3'       => 'KPI 3 value',
+        'kpi3' => 'KPI 3 value',
         'kpi3_label' => 'KPI 3 label',
-        'kpi3_url'   => 'KPI 3 URL',
+        'kpi3_url' => 'KPI 3 URL',
     );
 
     foreach ($hero_fields as $k => $l) {
@@ -414,13 +658,13 @@ function zelora_customizer($c)
      */
     $about_fields = array(
         'about_eyebrow' => 'Eyebrow',
-        'about_title'   => 'Title (HTML allowed)',
-        'about_p1'      => 'Paragraph 1',
-        'about_p2'      => 'Paragraph 2',
+        'about_title' => 'Title (HTML allowed)',
+        'about_p1' => 'Paragraph 1',
+        'about_p2' => 'Paragraph 2',
         'mission_title' => 'Mission title',
-        'mission_text'  => 'Mission text',
-        'vision_title'  => 'Vision title',
-        'vision_text'   => 'Vision text',
+        'mission_text' => 'Mission text',
+        'vision_title' => 'Vision title',
+        'vision_text' => 'Vision text',
     );
 
     foreach ($about_fields as $k => $l) {
@@ -447,8 +691,8 @@ function zelora_customizer($c)
      */
     $service_intro = array(
         'services_eyebrow' => 'Eyebrow',
-        'services_title'   => 'Title (HTML allowed)',
-        'services_intro'   => 'Intro',
+        'services_title' => 'Title (HTML allowed)',
+        'services_intro' => 'Intro',
     );
 
     foreach ($service_intro as $k => $l) {
@@ -488,8 +732,8 @@ function zelora_customizer($c)
      */
     $process_intro = array(
         'process_eyebrow' => 'Eyebrow',
-        'process_title'   => 'Title (HTML allowed)',
-        'process_intro'   => 'Intro',
+        'process_title' => 'Title (HTML allowed)',
+        'process_intro' => 'Intro',
     );
 
     foreach ($process_intro as $k => $l) {
@@ -528,12 +772,12 @@ function zelora_customizer($c)
      * ---------------------------------------------------------
      */
     $industry_fields = array(
-        'industries_eyebrow'    => 'Eyebrow',
-        'industries_title'      => 'Title (HTML allowed)',
-        'industries_intro'      => 'Intro',
-        'industries_button'     => 'Button text',
+        'industries_eyebrow' => 'Eyebrow',
+        'industries_title' => 'Title (HTML allowed)',
+        'industries_intro' => 'Intro',
+        'industries_button' => 'Button text',
         'industries_button_url' => 'Button URL',
-        'industries'            => 'Industries separated by |',
+        'industries' => 'Industries separated by |',
     );
 
     foreach ($industry_fields as $k => $l) {
@@ -557,36 +801,38 @@ function zelora_customizer($c)
      */
     $contact_fields = array(
         'contact_eyebrow' => 'Eyebrow',
-        'contact_title'   => 'Title (HTML allowed)',
-        'contact_intro'   => 'Intro',
-        'email'           => 'Email',
-        'phone'           => 'Phone',
-        'whatsapp_text'   => 'WhatsApp text',
-        'whatsapp_url'    => 'WhatsApp URL',
-        'company'         => 'Company',
-        'office_address'  => 'Address',
-        'footnote'        => 'Footnote',
-        'form_button'     => 'Form button',
-        'form_note'       => 'Form note',
-        'interest1'       => 'Interest 1',
-        'interest2'       => 'Interest 2',
-        'interest3'       => 'Interest 3',
-        'interest4'       => 'Interest 4',
-        'interest5'       => 'Interest 5',
+        'contact_title' => 'Title (HTML allowed)',
+        'contact_intro' => 'Intro',
+        'email' => 'Email',
+        'phone' => 'Phone',
+        'whatsapp_text' => 'WhatsApp text',
+        'whatsapp_url' => 'WhatsApp URL',
+        'company' => 'Company',
+        'office_address' => 'Address',
+        'footnote' => 'Footnote',
+        'form_button' => 'Form button',
+        'form_note' => 'Form note',
+        'interest1' => 'Interest 1',
+        'interest2' => 'Interest 2',
+        'interest3' => 'Interest 3',
+        'interest4' => 'Interest 4',
+        'interest5' => 'Interest 5',
     );
 
     foreach ($contact_fields as $k => $l) {
 
-        if (in_array(
-            $k,
-            array(
-                'contact_intro',
-                'footnote',
-                'form_note',
-                'office_address'
-            ),
-            true
-        )) {
+        if (
+            in_array(
+                $k,
+                array(
+                    'contact_intro',
+                    'footnote',
+                    'form_note',
+                    'office_address'
+                ),
+                true
+            )
+        ) {
 
             $type = 'textarea';
 
@@ -609,12 +855,12 @@ function zelora_customizer($c)
      * ---------------------------------------------------------
      */
     $footer_fields = array(
-        'footer_tagline'  => 'Footer tagline',
-        'copyright'       => 'Copyright',
-        'slogan'          => 'Footer slogan',
-        'facebook_url'    => 'Facebook URL',
-        'instagram_url'   => 'Instagram URL',
-        'linkedin_url'    => 'LinkedIn URL',
+        'footer_tagline' => 'Footer tagline',
+        'copyright' => 'Copyright',
+        'slogan' => 'Footer slogan',
+        'facebook_url' => 'Facebook URL',
+        'instagram_url' => 'Instagram URL',
+        'linkedin_url' => 'LinkedIn URL',
     );
 
     foreach ($footer_fields as $k => $l) {
@@ -635,9 +881,9 @@ function zelora_customizer($c)
     $image_fields = array(
         'header_logo' => 'Header logo',
         'footer_logo' => 'Footer logo',
-        'hero_image'  => 'Hero image',
+        'hero_image' => 'Hero image',
         'about_image' => 'About image',
-        'favicon'     => 'Favicon',
+        'favicon' => 'Favicon',
     );
 
     foreach ($image_fields as $k => $l) {
