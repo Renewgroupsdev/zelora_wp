@@ -1,0 +1,617 @@
+/* =========================================================
+   ZELORA GRADIENT THEME
+   Add this AFTER your existing CSS
+   ========================================================= */
+@import url('style.css');
+
+:root {
+    --navy: #0c1050;
+    --navy2: #17196b;
+    --purple: #5d56dc;
+    --purple-deep: #29247e;
+    --violet: #8378f5;
+    --gold: #efbd47;
+    --gold-light: #ffd976;
+    --ink: #171832;
+    --muted: #6a6d85;
+    --soft: #f3f4fb;
+    --line: #dedff0;
+
+    --gradient-hero:
+        radial-gradient(
+            circle at 78% 18%,
+            rgba(122, 111, 245, 0.30),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 18% 75%,
+            rgba(77, 74, 210, 0.22),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #070a3c 0%,
+            #11145b 38%,
+            #28247f 72%,
+            #090c44 100%
+        );
+
+    --gradient-purple:
+        linear-gradient(
+            135deg,
+            #9187ff 0%,
+            #665ee3 45%,
+            #3931a5 100%
+        );
+
+    --gradient-gold:
+        linear-gradient(
+            135deg,
+            #ffe28a 0%,
+            #efbd47 48%,
+            #d89423 100%
+        );
+
+    --gradient-glass:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.025)
+        );
+
+    --gradient-line:
+        linear-gradient(
+            90deg,
+            transparent,
+            #efbd47 20%,
+            #766ef1 55%,
+            #efbd47 82%,
+            transparent
+        );
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(93,86,220,.04),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 90% 60%,
+            rgba(239,189,71,.025),
+            transparent 18%
+        ),
+        #fff;
+}
+
+
+/* =========================
+   DARK SECTIONS
+========================= */
+
+.section-dark {
+    background: var(--gradient-hero);
+}
+
+.process-x {
+    background:
+        radial-gradient(
+            circle at 68% 40%,
+            rgba(103,94,235,.30),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 20% 90%,
+            rgba(239,189,71,.07),
+            transparent 23%
+        ),
+        linear-gradient(
+            135deg,
+            #080b40 0%,
+            #171968 52%,
+            #080a3c 100%
+        );
+}
+
+.contact-x {
+    background:
+        radial-gradient(
+            circle at 18% 100%,
+            rgba(79,76,205,.22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 82% 5%,
+            rgba(121,109,239,.22),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #070a39,
+            #151861 48%,
+            #080b41
+        );
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,10,55,.96),
+            rgba(35,31,116,.84)
+        );
+    box-shadow:
+        0 10px 35px rgba(5,8,45,.18);
+}
+
+.topbar.scrolled {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(7,10,54,.99),
+            rgba(42,35,132,.97)
+        );
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-box {
+    filter: drop-shadow(0 6px 14px rgba(93,86,220,.35));
+}
+
+
+/* =========================
+   HERO TITLE
+========================= */
+
+.hero-x-copy h1 em {
+    background:
+        linear-gradient(
+            90deg,
+            #f4dfa0 0%,
+            #d4d3ff 45%,
+            #958cff 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================
+   HERO CTA
+========================= */
+
+.btn-gold {
+    background: var(--gradient-gold);
+
+    box-shadow:
+        0 12px 32px rgba(239,189,71,.22),
+        inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.btn-gold:hover {
+    box-shadow:
+        0 18px 45px rgba(239,189,71,.35),
+        inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+.btn-play {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.13),
+            rgba(93,86,220,.12)
+        );
+
+    border: 1px solid rgba(255,255,255,.32);
+}
+
+.btn-play:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(93,86,220,.24)
+        );
+}
+
+.btn-play span {
+    background: var(--gradient-purple);
+
+    box-shadow:
+        0 0 25px rgba(93,86,220,.50);
+}
+
+
+/* =========================
+   KPI NUMBERS
+========================= */
+
+.hero-kpis b {
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #c9c8ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================
+   HERO SERVICE ICONS
+========================= */
+
+.svc-glyph {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(126,116,255,.24),
+            rgba(239,189,71,.08)
+        );
+
+    border-color: rgba(255,255,255,.28);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 10px 28px rgba(20,21,95,.25);
+}
+
+.hero-service-bar > div:hover .svc-glyph {
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 15px 32px rgba(93,86,220,.32),
+        0 0 25px rgba(239,189,71,.12);
+}
+
+
+/* =========================
+   DASHBOARD SCREEN
+========================= */
+
+.hero-dashboard {
+    box-shadow:
+        0 30px 75px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+
+/* =========================
+   FLOATING CUBES
+========================= */
+
+.floating-cube {
+    background:
+        linear-gradient(
+            145deg,
+            #8d84ff,
+            #5d56dc 46%,
+            #28237d 100%
+        );
+
+    box-shadow:
+        0 0 28px rgba(93,86,220,.48);
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-badge {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f7f6ff 55%,
+            #edecff 100%
+        );
+}
+
+.about-badge strong {
+    background:
+        linear-gradient(
+            90deg,
+            #27227a,
+            #655de3
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.service-x {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(93,86,220,.09),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #f7f8fd 0%,
+            #f3f4fb 65%,
+            #eef0fb 100%
+        );
+}
+
+.service-card {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #fbfbff 55%,
+            #f0f1ff 100%
+        );
+
+    border-color: #e0e1f1;
+
+    box-shadow:
+        0 15px 40px rgba(25,26,99,.08),
+        inset 0 1px 0 #fff;
+}
+
+.service-card:hover {
+    border-color: #c4c2eb;
+
+    box-shadow:
+        0 30px 70px rgba(24,25,94,.18),
+        0 0 0 1px rgba(93,86,220,.05);
+}
+
+.service-icon {
+    background: var(--gradient-purple);
+    color: #fff;
+
+    box-shadow:
+        0 10px 25px rgba(93,86,220,.24),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.icon-2 {
+    background: linear-gradient(135deg,#ff91b9,#e84e8b);
+    color: #fff;
+}
+
+.icon-3 {
+    background: linear-gradient(135deg,#87bdff,#4b70dc);
+    color: #fff;
+}
+
+.icon-4 {
+    background: var(--gradient-gold);
+    color: #513a0a;
+}
+
+.icon-5 {
+    background: linear-gradient(135deg,#6ce4dc,#26a8b6);
+    color: #fff;
+}
+
+
+/* =========================
+   SERVICE IMAGE
+========================= */
+
+.card-media::after {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(15,18,86,.78),
+            transparent 60%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(239,189,71,.08),
+            transparent
+        );
+}
+
+
+/* =========================
+   PROCESS
+========================= */
+
+.journey-line {
+    background: var(--gradient-line);
+
+    box-shadow:
+        0 0 22px rgba(239,189,71,.34);
+}
+
+.proc-circle {
+    background:
+        linear-gradient(
+            145deg,
+            #292c82,
+            #181a63 55%,
+            #0d104b
+        );
+
+    border-color: rgba(255,255,255,.25);
+}
+
+.process-track article:hover .proc-circle {
+    background: var(--gradient-purple);
+
+    box-shadow:
+        0 0 30px rgba(93,86,220,.45),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================
+   INDUSTRY PILLS
+========================= */
+
+.industry-pills span {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #f5f5ff
+        );
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.industry-pills span:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #f3f1ff,
+            #fff9e9
+        );
+
+    border-color: #a7a4db;
+
+    box-shadow:
+        0 12px 28px rgba(93,86,220,.11);
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+.contact-card {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.035)
+        );
+
+    border-color: rgba(255,255,255,.18);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+input,
+textarea,
+select {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.018)
+        );
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(93,86,220,.14),
+            rgba(255,255,255,.035)
+        );
+
+    border-color: rgba(239,189,71,.82);
+
+    box-shadow:
+        0 0 0 3px rgba(239,189,71,.08),
+        0 12px 28px rgba(0,0,0,.08);
+}
+
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.read-progress {
+    background:
+        linear-gradient(
+            90deg,
+            #efbd47 0%,
+            #ffd875 30%,
+            #8c82ff 65%,
+            #5d56dc 100%
+        );
+
+    box-shadow:
+        0 0 16px rgba(93,86,220,.45);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-x {
+    background:
+        radial-gradient(
+            circle at 78% 0%,
+            rgba(93,86,220,.15),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #070a39,
+            #0d104b 55%,
+            #07092f
+        );
+}
+
+
+/* =========================
+   GRADIENT BORDER UTILITY
+========================= */
+
+.gradient-border {
+    border: 1px solid transparent;
+
+    background:
+        linear-gradient(#fff,#fff) padding-box,
+        linear-gradient(
+            135deg,
+            #5d56dc,
+            #efbd47
+        ) border-box;
+}
+
+
+/* =========================
+   GRADIENT GLOW UTILITY
+========================= */
+
+.gradient-glow {
+    box-shadow:
+        0 0 0 1px rgba(93,86,220,.06),
+        0 20px 60px rgba(93,86,220,.16),
+        0 0 70px rgba(239,189,71,.07);
+}

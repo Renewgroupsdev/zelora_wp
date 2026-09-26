@@ -1,0 +1,644 @@
+/* =========================================================
+   ZELORA GRADIENT THEME
+   Add this AFTER your existing CSS
+   ========================================================= */
+@import url('style.css');
+
+:root {
+    /* Zelora brand palette — matched to the logo mark */
+    --burgundy: #601030;   /* Deep Burgundy — darkest */
+    --plum: #801840;       /* Wine / Plum — main brand tone */
+    --rose: #a04050;       /* Burgundy Rose — mid-tone */
+    --coral: #d08080;      /* Coral Rose — light gradient */
+    --peach: #f0c0b0;      /* Peach — highlight */
+
+    --navy: var(--burgundy);
+    --navy2: var(--plum);
+    --purple: var(--rose);
+    --purple-deep: var(--burgundy);
+    --violet: #b8657a;
+    --gold: var(--coral);
+    --gold-light: var(--peach);
+
+    --ink: #2a161c;
+    --muted: #83707a;
+    --soft: #faf4f6;
+    --line: #eee0e4;
+
+    --gradient-hero:
+        radial-gradient(
+            circle at 78% 18%,
+            rgba(160, 64, 80, 0.35),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 18% 75%,
+            rgba(128, 24, 64, 0.30),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #400c22 0%,
+            #601030 38%,
+            #801840 72%,
+            #380a1d 100%
+        );
+
+    --gradient-purple:
+        linear-gradient(
+            135deg,
+            #b8657a 0%,
+            #a04050 45%,
+            #6b152f 100%
+        );
+
+    --gradient-warm:
+        linear-gradient(
+            135deg,
+            #601030 0%,
+            #a04050 40%,
+            #d08080 75%,
+            #f0c0b0 100%
+        );
+
+    --gradient-gold:
+        linear-gradient(
+            135deg,
+            #f0c0b0 0%,
+            #d08080 55%,
+            #a04050 100%
+        );
+
+    --gradient-glass:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.025)
+        );
+
+    --gradient-line:
+        linear-gradient(
+            90deg,
+            transparent,
+            #d08080 20%,
+            #a04050 55%,
+            #d08080 82%,
+            transparent
+        );
+}
+
+::selection {
+    background: rgba(160, 64, 80, .22);
+    color: #2a161c;
+}
+
+:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 3px;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(199, 107, 131, .04),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 90% 60%,
+            rgba(213, 102, 97, .025),
+            transparent 18%
+        ),
+        #fff;
+}
+
+
+/* =========================
+   DARK SECTIONS
+========================= */
+
+.section-dark {
+    background: var(--gradient-hero);
+}
+
+.process-x {
+    background:
+        radial-gradient(
+            circle at 68% 40%,
+            rgba(213, 116, 142, .30),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 20% 90%,
+            rgba(213, 102, 97, .07),
+            transparent 23%
+        ),
+        linear-gradient(
+            135deg,
+            #3a0e1a 0%,
+            #601f31 52%,
+            #370d19 100%
+        );
+}
+
+.contact-x {
+    background:
+        radial-gradient(
+            circle at 18% 100%,
+            rgba(185, 96, 120, .22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 82% 5%,
+            rgba(226, 122, 149, .22),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #340c17,
+            #591d2e 48%,
+            #3b0e1b
+        );
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(50, 12, 23, .96),
+            rgba(108, 39, 58, .84)
+        );
+    box-shadow:
+        0 10px 35px rgba(41, 9, 18, .18);
+}
+
+.topbar.scrolled {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(49, 12, 23, .99),
+            rgba(122, 45, 65, .97)
+        );
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-box {
+    filter: drop-shadow(0 6px 14px rgba(199, 107, 131, .35));
+}
+
+
+/* =========================
+   HERO TITLE
+========================= */
+
+.hero-x-copy h1 em {
+    background:
+        linear-gradient(
+            90deg,
+            #f0c0b0 0%,
+            #d08080 55%,
+            #a04050 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================
+   HERO CTA
+========================= */
+
+.btn-gold {
+    background: var(--gradient-gold);
+
+    box-shadow:
+        0 12px 32px rgba(213, 102, 97, .22),
+        inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.btn-gold:hover {
+    box-shadow:
+        0 18px 45px rgba(213, 102, 97, .35),
+        inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+.btn-play {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.13),
+            rgba(199, 107, 131, .12)
+        );
+
+    border: 1px solid rgba(255,255,255,.32);
+}
+
+.btn-play:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(199, 107, 131, .24)
+        );
+}
+
+.btn-play span {
+    background: var(--gradient-purple);
+
+    box-shadow:
+        0 0 25px rgba(199, 107, 131, .50);
+}
+
+
+/* =========================
+   KPI NUMBERS
+========================= */
+
+.hero-kpis b {
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #f8cfda
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================
+   HERO SERVICE ICONS
+========================= */
+
+.svc-glyph {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(237, 134, 161, .24),
+            rgba(213, 102, 97, .08)
+        );
+
+    border-color: rgba(255,255,255,.28);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 10px 28px rgba(88, 28, 44, .25);
+}
+
+.hero-service-bar > div:hover .svc-glyph {
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 15px 32px rgba(199, 107, 131, .32),
+        0 0 25px rgba(213, 102, 97, .12);
+}
+
+
+/* =========================
+   DASHBOARD SCREEN
+========================= */
+
+.hero-dashboard {
+    box-shadow:
+        0 30px 75px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+
+/* =========================
+   FLOATING CUBES
+========================= */
+
+.floating-cube {
+    background:
+        linear-gradient(
+            145deg,
+            #ef94ac,
+            #c76b83 46%,
+            #742c3f 100%
+        );
+
+    box-shadow:
+        0 0 28px rgba(199, 107, 131, .48);
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-badge {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fef7f9 55%,
+            #fdeef2 100%
+        );
+}
+
+.about-badge strong {
+    background:
+        linear-gradient(
+            90deg,
+            #712b3d,
+            #ce728a
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.service-x {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(199, 107, 131, .09),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #fcf8f9 0%,
+            #faf4f6 65%,
+            #faeff2 100%
+        );
+}
+
+.service-card {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #fefcfc 55%,
+            #fdf2f5 100%
+        );
+
+    border-color: #efe2e6;
+
+    box-shadow:
+        0 15px 40px rgba(92, 32, 49, .08),
+        inset 0 1px 0 #fff;
+}
+
+.service-card:hover {
+    border-color: #e7c6cf;
+
+    box-shadow:
+        0 30px 70px rgba(87, 31, 47, .18),
+        0 0 0 1px rgba(199, 107, 131, .05);
+}
+
+.service-icon {
+    background: var(--gradient-purple);
+    color: #fff;
+
+    box-shadow:
+        0 10px 25px rgba(199, 107, 131, .24),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.icon-2 {
+    background: linear-gradient(135deg,#f19faf,#d0667c);
+    color: #fff;
+}
+
+.icon-3 {
+    background: linear-gradient(135deg,#ef97b7,#c56282);
+    color: #fff;
+}
+
+.icon-4 {
+    background: var(--gradient-gold);
+    color: #4a1211;
+}
+
+.icon-5 {
+    background: linear-gradient(135deg,#d1817f,#a0473c);
+    color: #fff;
+}
+
+
+/* =========================
+   SERVICE IMAGE
+========================= */
+
+.card-media::after {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(79, 22, 38, .78),
+            transparent 60%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(213, 102, 97, .08),
+            transparent
+        );
+}
+
+
+/* =========================
+   PROCESS
+========================= */
+
+.journey-line {
+    background: var(--gradient-line);
+
+    box-shadow:
+        0 0 22px rgba(213, 102, 97, .34);
+}
+
+.proc-circle {
+    background:
+        linear-gradient(
+            145deg,
+            #743748,
+            #5c2030 55%,
+            #451321
+        );
+
+    border-color: rgba(255,255,255,.25);
+}
+
+.process-track article:hover .proc-circle {
+    background: var(--gradient-purple);
+
+    box-shadow:
+        0 0 30px rgba(199, 107, 131, .45),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================
+   INDUSTRY PILLS
+========================= */
+
+.industry-pills span {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fef6f8
+        );
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.industry-pills span:hover {
+    background:
+        linear-gradient(
+            135deg,
+            #fdf3f5,
+            #fcedec
+        );
+
+    border-color: #d5aab5;
+
+    box-shadow:
+        0 12px 28px rgba(199, 107, 131, .11);
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+.contact-card {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.035)
+        );
+
+    border-color: rgba(255,255,255,.18);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+input,
+textarea,
+select {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.018)
+        );
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(199, 107, 131, .14),
+            rgba(255,255,255,.035)
+        );
+
+    border-color: rgba(213, 102, 97, .82);
+
+    box-shadow:
+        0 0 0 3px rgba(213, 102, 97, .08),
+        0 12px 28px rgba(0,0,0,.08);
+}
+
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.read-progress {
+    background:
+        linear-gradient(
+            90deg,
+            #f0c0b0 0%,
+            #d08080 40%,
+            #a04050 75%,
+            #801840 100%
+        );
+
+    box-shadow:
+        0 0 16px rgba(199, 107, 131, .45);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-x {
+    background:
+        radial-gradient(
+            circle at 78% 0%,
+            rgba(199, 107, 131, .15),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #340c17,
+            #451321 55%,
+            #2b0b14
+        );
+}
+
+
+/* =========================
+   GRADIENT BORDER UTILITY
+========================= */
+
+.gradient-border {
+    border: 1px solid transparent;
+
+    background:
+        linear-gradient(#fff,#fff) padding-box,
+        linear-gradient(
+            135deg,
+            #c76b83,
+            #d56661
+        ) border-box;
+}
+
+
+/* =========================
+   GRADIENT GLOW UTILITY
+========================= */
+
+.gradient-glow {
+    box-shadow:
+        0 0 0 1px rgba(199, 107, 131, .06),
+        0 20px 60px rgba(199, 107, 131, .16),
+        0 0 70px rgba(213, 102, 97, .07);
+}

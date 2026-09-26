@@ -1,0 +1,11 @@
+/*
+Theme Name: Zelora Digital Systems
+Author: Zelora Infotech
+Description: Zelora website converted from the supplied HTML source with WordPress Customizer editing and configurable URLs.
+Version: 1.0.0
+Text Domain: zelora
+*/
+
+.main-nav .wp-primary-menu,.footer-x nav .footer-menu{list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:28px}.main-nav .wp-primary-menu li,.footer-x nav .footer-menu li{list-style:none;margin:0;padding:0}.main-nav .wp-primary-menu a,.footer-x nav .footer-menu a{text-decoration:none}.main-nav .wp-primary-menu .current-menu-item>a{opacity:1}.main-nav .wp-primary-menu .current-menu-item>a:after{width:100%}
+body.admin-bar .topbar{top:32px}@media screen and (max-width:782px){body.admin-bar .topbar{top:46px}}
+@media(max-width:760px){.main-nav .wp-primary-menu{flex-direction:column;align-items:flex-start;width:100%;gap:18px}}

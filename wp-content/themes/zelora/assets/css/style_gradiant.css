@@ -1,0 +1,1129 @@
+/* =========================================================
+   ZELORA GRADIENT THEME
+   Add this AFTER your existing CSS
+   ========================================================= */
+@import url('style.css');
+
+:root {
+    /* Zelora Main 4-Color Palette */
+    --wine: #801840;    /* Wine / Plum */
+    --rose: #a04050;    /* Burgundy Rose */
+    --sage: #dce8e1;    /* Soft Sage */
+    --powder: #d8e4ef;  /* Powder Blue */
+
+    --navy: var(--wine);
+    --navy2: #5c1230;
+    --purple: var(--wine);
+    --purple-deep: #5c1230;
+    --violet: #a8657a;
+    --gold: var(--rose);
+    --gold-light: #c9808f;
+
+    --ink: #2a1a1f;
+    --muted: #7f7074;
+    --soft: #f9f5f6;
+    --line: #ede1e5;
+
+    --gradient-hero:
+        radial-gradient(
+            circle at 78% 18%,
+            rgba(160, 64, 80, 0.28),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 18% 75%,
+            rgba(128, 24, 64, 0.24),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #4a0f28 0%,
+            #5c1230 38%,
+            #801840 72%,
+            #430d24 100%
+        );
+
+    --gradient-purple:
+        linear-gradient(
+            135deg,
+            #a8657a 0%,
+            #801840 45%,
+            #5c1230 100%
+        );
+
+    --gradient-gold:
+        linear-gradient(
+            135deg,
+            #c9808f 0%,
+            #a04050 55%,
+            #801840 100%
+        );
+
+    --gradient-glass:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.15),
+            rgba(255,255,255,.025)
+        );
+
+    --gradient-line:
+        linear-gradient(
+            90deg,
+            transparent,
+            #dce8e1 18%,
+            #a04050 50%,
+            #d8e4ef 82%,
+            transparent
+        );
+}
+
+::selection {
+    background: rgba(160, 64, 80, .18);
+    color: #2a1a1f;
+}
+
+:focus-visible {
+    outline: 2px solid var(--rose);
+    outline-offset: 3px;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    background:
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(188, 118, 136, .04),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 90% 60%,
+            rgba(199, 111, 135, .025),
+            transparent 18%
+        ),
+        #fff;
+}
+
+
+/* =========================
+   DARK SECTIONS
+========================= */
+
+.section-dark {
+    background: var(--gradient-hero);
+}
+
+.process-x {
+    background:
+        radial-gradient(
+            circle at 68% 40%,
+            rgba(202, 127, 146, .30),
+            transparent 27%
+        ),
+        radial-gradient(
+            circle at 20% 90%,
+            rgba(199, 111, 135, .07),
+            transparent 23%
+        ),
+        linear-gradient(
+            135deg,
+            #35131c 0%,
+            #592634 52%,
+            #33121b 100%
+        );
+}
+
+.contact-x {
+    background:
+        radial-gradient(
+            circle at 18% 100%,
+            rgba(174, 107, 124, .22),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 82% 5%,
+            rgba(214, 134, 154, .22),
+            transparent 28%
+        ),
+        linear-gradient(
+            135deg,
+            #31111a,
+            #532330 48%,
+            #36131d
+        );
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.topbar {
+    background: #fff;
+    /* background:
+        linear-gradient(
+            135deg,
+            rgba(48, 17, 26, .96),
+            rgba(100, 47, 61, .84)
+        ); */
+    box-shadow:
+        0 10px 35px rgba(43, 14, 22, .18);
+}
+
+.topbar.scrolled {
+    background: #fff;
+    /* background:
+        linear-gradient(
+            135deg,
+            rgba(48, 17, 25, .99),
+            rgba(109, 58, 71, .97)
+        ); */
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-box {
+    filter: drop-shadow(0 6px 14px rgba(188, 118, 136, .35));
+}
+
+
+/* =========================
+   HERO TITLE
+========================= */
+
+.hero-x-copy h1 em {
+    background:
+        linear-gradient(
+            90deg,
+            #dce8e1 0%,
+            #f4e3e7 45%,
+            #d8e4ef 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================
+   HERO CTA
+========================= */
+
+.btn-gold {
+    background: var(--gradient-gold);
+
+    box-shadow:
+        0 12px 32px rgba(199, 111, 135, .22),
+        inset 0 1px 0 rgba(255,255,255,.45);
+}
+
+.btn-gold:hover {
+    box-shadow:
+        0 18px 45px rgba(199, 111, 135, .35),
+        inset 0 1px 0 rgba(255,255,255,.5);
+}
+
+.btn-play {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.13),
+            rgba(188, 118, 136, .12)
+        );
+
+    border: 1px solid rgba(255,255,255,.32);
+}
+
+.btn-play:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.18),
+            rgba(188, 118, 136, .24)
+        );
+}
+
+.btn-play span {
+    background: var(--gradient-purple);
+
+    box-shadow:
+        0 0 25px rgba(188, 118, 136, .50);
+}
+
+
+/* =========================
+   KPI NUMBERS
+========================= */
+
+.hero-kpis b {
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #dce8e1
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================
+   HERO SERVICE ICONS
+========================= */
+
+.svc-glyph {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(229, 142, 164, .24),
+            rgba(199, 111, 135, .08)
+        );
+
+    border-color: rgba(255,255,255,.28);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 10px 28px rgba(81, 34, 47, .25);
+}
+
+.hero-service-bar > div:hover .svc-glyph {
+    transform: translateY(-5px) scale(1.05);
+
+    box-shadow:
+        0 15px 32px rgba(188, 118, 136, .32),
+        0 0 25px rgba(199, 111, 135, .12);
+}
+
+
+/* =========================
+   DASHBOARD SCREEN
+========================= */
+
+.hero-dashboard {
+    box-shadow:
+        0 30px 75px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+
+/* =========================
+   FLOATING CUBES
+========================= */
+
+.floating-cube {
+    background:
+        linear-gradient(
+            145deg,
+            #c9808f,
+            #a04050 46%,
+            #5c1230 100%
+        );
+
+    box-shadow:
+        0 0 28px rgba(160, 64, 80, .48);
+}
+
+.cube-2 {
+    background:
+        linear-gradient(145deg, #f0f6f3, #dce8e1 55%, #a9c2b6 100%);
+    box-shadow: 0 0 22px rgba(220, 232, 225, .55);
+}
+
+.cube-3 {
+    background:
+        linear-gradient(145deg, #eef4f9, #d8e4ef 55%, #a3bcd4 100%);
+    box-shadow: 0 0 22px rgba(216, 228, 239, .55);
+}
+
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-badge {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fdf8f9 55%,
+            #fbf0f3 100%
+        );
+}
+
+.about-badge strong {
+    background:
+        linear-gradient(
+            90deg,
+            #693341,
+            #c37d8f
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* =========================
+   SERVICES
+========================= */
+
+.service-x {
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(188, 118, 136, .09),
+            transparent 30%
+        ),
+        linear-gradient(
+            180deg,
+            #fcf8f9 0%,
+            #f9f5f6 65%,
+            #f9f0f3 100%
+        );
+}
+
+.service-card {
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff 0%,
+            #fefcfc 55%,
+            #fcf3f5 100%
+        );
+
+    border-color: #eee3e6;
+
+    box-shadow:
+        0 15px 40px rgba(85, 39, 51, .08),
+        inset 0 1px 0 #fff;
+}
+
+.service-card:hover {
+    border-color: #e3cad0;
+
+    box-shadow:
+        0 30px 70px rgba(81, 37, 49, .18),
+        0 0 0 1px rgba(188, 118, 136, .05);
+}
+
+.service-icon {
+    background: var(--gradient-purple);
+    color: #fff;
+
+    box-shadow:
+        0 10px 25px rgba(188, 118, 136, .24),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.icon-2 {
+    background: linear-gradient(135deg,#eaa6b5,#c47285);
+    color: #fff;
+}
+
+.icon-3 {
+    background: linear-gradient(135deg,#d8e4ef,#7a9cbf);
+    color: #23384a;
+}
+
+.icon-4 {
+    background: var(--gradient-gold);
+    color: #441724;
+}
+
+.icon-5 {
+    background: linear-gradient(135deg,#dce8e1,#7a9c89);
+    color: #24352c;
+}
+
+
+/* =========================
+   SERVICE IMAGE
+========================= */
+
+.card-media::after {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(73, 28, 41, .78),
+            transparent 60%
+        ),
+        linear-gradient(
+            90deg,
+            rgba(199, 111, 135, .08),
+            transparent
+        );
+}
+
+
+/* =========================
+   PROCESS
+========================= */
+
+.journey-line {
+    background: var(--gradient-line);
+
+    box-shadow:
+        0 0 22px rgba(199, 111, 135, .34);
+}
+
+.proc-circle {
+    background:
+        linear-gradient(
+            145deg,
+            #6d3e4b,
+            #552633 55%,
+            #3f1923
+        );
+
+    border-color: rgba(255,255,255,.25);
+}
+
+.process-track article:hover .proc-circle {
+    background: var(--gradient-purple);
+
+    box-shadow:
+        0 0 30px rgba(188, 118, 136, .45),
+        inset 0 1px 0 rgba(255,255,255,.25);
+
+    transform: translateY(-4px);
+}
+
+
+/* =========================
+   INDUSTRY PILLS
+========================= */
+
+.industry-pills span {
+    background:
+        linear-gradient(
+            135deg,
+            #ffffff,
+            #fdf7f9
+        );
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease,
+        background .25s ease;
+}
+
+.industry-pills span:hover {
+    background:
+        linear-gradient(135deg, #cfbbc0, #b17183);
+
+    border-color: #d1aeb7;
+
+    box-shadow:
+        0 12px 28px rgba(188, 118, 136, .11);
+}
+
+
+/* =========================
+   CONTACT FORM
+========================= */
+
+.contact-card {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.11),
+            rgba(255,255,255,.035)
+        );
+
+    border-color: rgba(255,255,255,.18);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+input,
+textarea,
+select {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.07),
+            rgba(255,255,255,.018)
+        );
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(188, 118, 136, .14),
+            rgba(255,255,255,.035)
+        );
+
+    border-color: rgba(199, 111, 135, .82);
+
+    box-shadow:
+        0 0 0 3px rgba(199, 111, 135, .08),
+        0 12px 28px rgba(0,0,0,.08);
+}
+
+
+/* =========================
+   PROGRESS BAR
+========================= */
+
+.read-progress {
+    background:
+        linear-gradient(
+            90deg,
+            #dce8e1 0%,
+            #d8e4ef 30%,
+            #a04050 70%,
+            #801840 100%
+        );
+
+    box-shadow:
+        0 0 16px rgba(188, 118, 136, .45);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-x {
+    background:
+        radial-gradient(
+            circle at 78% 0%,
+            rgba(188, 118, 136, .15),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #31111a,
+            #3f1923 55%,
+            #2c1018
+        );
+}
+
+
+/* =========================
+   GRADIENT BORDER UTILITY
+========================= */
+
+.gradient-border {
+    border: 1px solid transparent;
+
+    background:
+        linear-gradient(#fff,#fff) padding-box,
+        linear-gradient(
+            135deg,
+            #bc7688,
+            #c76f87
+        ) border-box;
+}
+
+
+/* =========================
+   GRADIENT GLOW UTILITY
+========================= */
+
+.gradient-glow {
+    box-shadow:
+        0 0 0 1px rgba(188, 118, 136, .06),
+        0 20px 60px rgba(188, 118, 136, .16),
+        0 0 70px rgba(199, 111, 135, .07);
+}
+
+/* =========================================================
+   ZELORA HERO PALETTE THEME
+   Deep Burgundy  #280C17
+   Wine / Plum    #5E1D30
+   Burgundy Rose  #9A4658
+   Warm Coral     #C98A86
+   Peach Gold     #E5B07F  (all buttons)
+   Warm Ivory     #FDF8F5
+   ========================================================= */
+
+:root {
+    --z-burgundy: #280c17;
+    --z-wine: #5e1d30;
+    --z-rose: #9a4658;
+    --z-coral: #c98a86;
+    --z-peach: #e5b07f;
+    --z-ivory: #fdf8f5;
+
+    --navy: var(--z-wine);
+    --navy2: var(--z-burgundy);
+    --purple: var(--z-wine);
+    --wine: var(--z-wine);
+    --rose: var(--z-rose);
+    --gold: var(--z-rose);
+    --soft: var(--z-ivory);
+
+    --gradient-peach: linear-gradient(135deg, #ecc198 0%, var(--z-peach) 55%, #d99d6c 100%);
+    --gradient-headline: linear-gradient(90deg, var(--z-peach) 0%, var(--z-coral) 100%);
+    --gradient-hero:
+        radial-gradient(circle at 80% 34%, rgba(201, 138, 134, .16), transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(154, 70, 88, .40), transparent 42%),
+        linear-gradient(135deg, var(--z-burgundy) 0%, var(--z-burgundy) 26%, #3b1321 55%, var(--z-wine) 100%);
+    --gradient-purple: linear-gradient(135deg, var(--z-coral) 0%, var(--z-rose) 50%, var(--z-wine) 100%);
+    --gradient-gold: var(--gradient-peach);
+    --gradient-line: linear-gradient(90deg, transparent, var(--z-peach) 25%, var(--z-coral) 55%, var(--z-rose) 80%, transparent);
+}
+
+::selection {
+    background: rgba(229, 176, 127, .35);
+    color: var(--z-burgundy);
+}
+
+/* Dark sections use peach gold as the accent;
+   light sections keep burgundy rose for readable contrast */
+.section-dark,
+.footer-x {
+    --gold: var(--z-peach);
+}
+
+body {
+    background: var(--z-ivory);
+    color: var(--z-burgundy);
+}
+
+.light {
+    background: var(--z-ivory);
+}
+
+.wave path,
+.wave-about-top path {
+    /* matches About's own white background (set below) */
+    fill: #fff;
+}
+
+
+/* ---------- HEADER (white) ---------- */
+
+.topbar,
+.topbar.scrolled {
+    background: #fff;
+    backdrop-filter: none;
+    border-bottom: 1px solid #f1e6e3;
+    box-shadow: 0 6px 24px rgba(40, 12, 23, .06);
+}
+
+.topbar.scrolled {
+    box-shadow: 0 10px 30px rgba(40, 12, 23, .12);
+}
+
+/* .brand-copy {
+    color: var(--z-wine);
+} */
+
+.main-nav a {
+    color: var(--z-wine);
+    font-weight: 500;
+    transition: color .2s;
+}
+
+.main-nav a:hover {
+    color: var(--z-rose);
+}
+
+.logo-box {
+    filter: none;
+}
+
+.nav-toggle i {
+    background: var(--z-wine);
+}
+
+@media (max-width: 760px) {
+    .main-nav {
+        background: #fff;
+        border-right: 1px solid #f1e6e3;
+        box-shadow: 20px 0 60px rgba(40, 12, 23, .18);
+    }
+
+    .nav-backdrop {
+        background: rgba(40, 12, 23, .55);
+    }
+}
+
+
+/* ---------- BUTTONS (peach gold) ---------- */
+
+.btn-gold,
+.header-cta,
+.back-to-top {
+    background: var(--gradient-peach);
+    color: var(--z-burgundy) !important;
+    box-shadow:
+        0 12px 30px rgba(229, 176, 127, .30),
+        inset 0 1px 0 rgba(255, 255, 255, .45);
+}
+
+.btn-gold:hover,
+.header-cta:hover,
+.back-to-top:hover {
+    box-shadow:
+        0 18px 42px rgba(229, 176, 127, .42),
+        inset 0 1px 0 rgba(255, 255, 255, .5);
+}
+
+.header-cta {
+    font-weight: 700;
+    padding: 11px 20px;
+    transition: transform .2s, box-shadow .2s;
+}
+
+.header-cta:hover {
+    transform: translateY(-2px);
+}
+
+.header-cta span {
+    color: var(--z-wine);
+}
+
+.btn-gold b {
+    display: inline-grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(40, 12, 23, .10);
+    font-size: 11px;
+}
+
+.btn-play {
+    background: rgba(253, 248, 245, .04);
+    border: 1px solid rgba(201, 138, 134, .40);
+    color: var(--z-ivory);
+}
+
+.btn-play:hover {
+    background: rgba(253, 248, 245, .08);
+    border-color: rgba(229, 176, 127, .60);
+}
+
+.btn-play span {
+    background: var(--gradient-peach);
+    color: var(--z-burgundy);
+    box-shadow: 0 0 22px rgba(229, 176, 127, .35);
+}
+
+
+/* ---------- HERO & DARK SECTIONS ---------- */
+
+.section-dark,
+.hero-x.section-dark,
+.process-x,
+.contact-x {
+    background: var(--gradient-hero);
+}
+
+.footer-x {
+    /* background: linear-gradient(135deg, var(--z-burgundy) 0%, #34101e 60%, var(--z-wine) 100%); */
+    background: #fff;
+    color: var(--z-wine);
+}
+
+.hero-vignette {
+    background:
+        radial-gradient(circle at 74% 50%, rgba(154, 70, 88, .18), transparent 32%),
+        radial-gradient(circle at 15% 20%, rgba(0, 0, 0, .20), transparent 40%);
+}
+
+.grid-noise {
+    opacity: .08;
+}
+
+.hero-orbit,
+.art-orbit-path {
+    border-color: rgba(229, 176, 127, .16);
+}
+
+.hero-orbit-2,
+.art-orbit-path:after {
+    border-color: rgba(201, 138, 134, .14);
+}
+
+.eyebrow {
+    color: var(--z-peach);
+}
+
+.eyebrow > span {
+    background: var(--z-peach);
+}
+
+.eyebrow.dark {
+    color: var(--z-rose);
+}
+
+.eyebrow.dark > span {
+    background: var(--z-rose);
+}
+
+.hero-x-copy h1 {
+    color: var(--z-ivory);
+}
+
+.hero-x-copy h1 em {
+    background: var(--gradient-headline);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-x-copy > p {
+    color: rgba(253, 248, 245, .74);
+}
+
+.hero-kpis {
+    border-top-color: rgba(201, 138, 134, .22);
+}
+
+.hero-kpis div {
+    border-right-color: rgba(201, 138, 134, .22);
+}
+
+.hero-kpis b {
+    font-family: var(--serif);
+    background: none;
+    color: var(--z-peach);
+    -webkit-text-fill-color: var(--z-peach);
+}
+
+.hero-kpis span {
+    color: rgba(253, 248, 245, .60);
+}
+
+.hero-dashboard {
+    border-color: rgba(201, 138, 134, .25);
+}
+
+.screen-glow {
+    background: radial-gradient(circle, rgba(154, 70, 88, .35), transparent 50%);
+}
+
+.floating-cube,
+.cube-2,
+.cube-3 {
+    background: linear-gradient(145deg, var(--z-peach) 0%, var(--z-coral) 55%, var(--z-rose) 100%);
+    box-shadow: 0 0 24px rgba(229, 176, 127, .30);
+    border-radius: 5px;
+}
+
+.cursor-light {
+    background: radial-gradient(circle, rgba(229, 176, 127, .07), transparent 66%);
+}
+
+.svc-glyph {
+    background: linear-gradient(145deg, rgba(229, 176, 127, .20), rgba(154, 70, 88, .10));
+    border-color: rgba(229, 176, 127, .32);
+    color: var(--z-peach);
+}
+
+.hero-service-bar > div:after {
+    background: linear-gradient(90deg, var(--z-peach), var(--z-coral));
+}
+
+.proc-circle {
+    background: linear-gradient(145deg, var(--z-rose), var(--z-wine) 60%, var(--z-burgundy));
+}
+
+.read-progress {
+    background: linear-gradient(90deg, var(--z-peach), var(--z-coral) 50%, var(--z-rose));
+    box-shadow: 0 0 14px rgba(229, 176, 127, .45);
+}
+
+
+/* ---------- LIGHT SECTIONS ---------- */
+
+.service-x {
+    background: linear-gradient(180deg, var(--z-ivory) 0%, #faf1ed 100%);
+}
+
+.service-icon {
+    background: var(--gradient-purple);
+}
+
+.icon-4 {
+    background: var(--gradient-peach);
+    color: var(--z-burgundy);
+}
+
+
+
+/* =========================================================
+   ABOUT vs SERVICES — SECTION DIFFERENTIATION
+   About: clean white, single accent per point.
+   Services: soft blush wash, palette-matched card art.
+   ========================================================= */
+
+/* ---------- ABOUT: crisp white, warm accent dots ---------- */
+
+.about-x.light {
+    background: #fff;
+}
+
+.about-dot-grid {
+    background-image: radial-gradient(circle, rgba(154, 70, 88, .18) 1.6px, transparent 1.7px);
+}
+
+.about-dot-a {
+    background: var(--z-peach);
+    box-shadow: 0 0 16px rgba(229, 176, 127, .55);
+}
+
+.about-dot-b {
+    background: var(--z-coral);
+    box-shadow: 0 0 14px rgba(201, 138, 134, .55);
+}
+
+.about-dot-c {
+    background: var(--z-rose);
+    opacity: .55;
+}
+
+.photo-outline:before,
+.photo-outline:after {
+    background: var(--z-peach);
+    box-shadow: 0 0 18px rgba(229, 176, 127, .55);
+}
+
+.about-point-icon.ico-1 {
+    background: linear-gradient(135deg, var(--z-rose), var(--z-wine));
+}
+
+.about-point-icon.ico-2 {
+    background: linear-gradient(135deg, var(--z-coral), var(--z-rose));
+}
+
+.about-note em {
+    color: var(--z-rose);
+}
+
+
+/* ---------- SERVICES: distinct blush wash ---------- */
+
+.service-x.light {
+    background:
+        radial-gradient(circle at 12% 0%, rgba(201, 138, 134, .14), transparent 38%),
+        radial-gradient(circle at 92% 90%, rgba(229, 176, 127, .12), transparent 40%),
+        linear-gradient(180deg, #f7ecec 0%, #f6ede9 60%, #f4e7e2 100%);
+}
+
+.service-card {
+    background: #fff;
+    box-shadow: 0 12px 34px rgba(94, 29, 48, .06);
+}
+
+.service-card:hover {
+    box-shadow: 0 28px 60px rgba(94, 29, 48, .14);
+    border-color: rgba(154, 70, 88, .22);
+}
+
+.service-card:after {
+    background: linear-gradient(90deg, var(--z-wine), var(--z-peach));
+}
+
+.service-card a {
+    color: var(--z-wine);
+}
+
+.service-card a span {
+    color: var(--z-rose);
+}
+
+/* Card art — each service gets its own spot on the wine → peach spectrum */
+.card-erp {
+    background: linear-gradient(135deg, var(--z-wine) 0%, var(--z-burgundy) 100%);
+}
+
+.card-mobile {
+    background: linear-gradient(135deg, var(--z-rose) 0%, var(--z-wine) 100%);
+}
+
+.card-ai {
+    background: linear-gradient(135deg, var(--z-peach) 0%, var(--z-coral) 55%, var(--z-rose) 100%);
+}
+
+.card-growth {
+    background: linear-gradient(135deg, #ecc198 0%, var(--z-coral) 45%, var(--z-rose) 100%);
+}
+
+.card-auto {
+    background: linear-gradient(135deg, var(--z-burgundy) 0%, var(--z-wine) 55%, var(--z-rose) 100%);
+}
+
+/* Icon medallions — pastel tint matched to each card's palette */
+.service-icon {
+    background: #fbeef1;
+    color: var(--z-wine);
+}
+
+.icon-2 {
+    background: #f8eaee;
+    color: var(--z-rose);
+}
+
+.icon-3 {
+    background: #fdf1e5;
+    color: #b06a4c;
+}
+
+.icon-4 {
+    background: #fbe9e4;
+    color: var(--z-rose);
+}
+
+.icon-5 {
+    background: #f2e5e8;
+    color: var(--z-burgundy);
+}
+
+.wave-service-bottom path {
+    fill: var(--z-burgundy);
+}
+
+
+/* =========================================================
+   WAVE DIVIDERS — match each curve to the section it reveals
+   Every wave sits at the seam of two sections and is filled
+   with the colour of the section it's peeking into, not its
+   own section's colour.
+   ========================================================= */
+
+/* Hero -> About: About is pure white */
+.wave path {
+    fill: #fff;
+}
+
+/* About -> Services: Services opens on a warm blush wash
+   (matches the top stop of .service-x.light's background) */
+.wave-about-bottom path {
+    fill: #f7ecec;
+}
+
+/* Services -> Process: Process opens on deep burgundy
+   (matches the first stop of --gradient-hero) */
+.wave-service-bottom path {
+    fill: #491d29;
+    /* fill: linear-gradient(#801840, #D08080); */
+    /* background:radial-gradient(circle at 12% 0%, rgba(201, 138, 134, .14), transparent 38%),
+        radial-gradient(circle at 92% 90%, rgba(229, 176, 127, .12), transparent 40%),
+        linear-gradient(180deg, #f7ecec 0%, #f6ede9 60%, #f4e7e2 100%) */
+}
+
+/* Process -> Industries: Industries is the same warm ivory
+   as the rest of the .light sections, not pure white */
+.wave-process-bottom path {
+    fill: var(--z-ivory);
+}
