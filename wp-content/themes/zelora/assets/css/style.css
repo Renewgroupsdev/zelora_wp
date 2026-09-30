@@ -932,7 +932,10 @@ select {
     border-radius: 18px;
     box-shadow: 0 12px 36px #5527330a;
     transition: .35s cubic-bezier(.2, .8, .2, 1);
-    cursor: grab
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: inherit
 }
 
 .service-card.reveal:nth-child(1) {
@@ -1087,15 +1090,16 @@ select {
     margin: 0
 }
 
-.service-card a {
+.service-card .service-link {
+    display: inline-block;
     font-size: 10px;
     font-weight: 800;
     color: var(--purple)
 }
 
-.service-card a span {
+.service-card .service-link span {
     color: var(--gold);
-    margin-left: 5px
+    margin-left: 5px;
 }
 
 .touch-hint {

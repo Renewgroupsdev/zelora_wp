@@ -1034,11 +1034,11 @@ body {
     background: linear-gradient(90deg, var(--z-wine), var(--z-peach));
 }
 
-.service-card a {
+.service-card .service-link {
     color: var(--z-wine);
 }
 
-.service-card a span {
+.service-card .service-link span {
     color: var(--z-rose);
 }
 

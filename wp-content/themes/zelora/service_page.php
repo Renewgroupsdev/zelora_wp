@@ -40,6 +40,7 @@ if (have_posts()):
       </svg></div>
   </section>
 
+  <?php if (zelora_service_section_visible($post_id, 'intro')): ?>
   <section class="svc-intro light" id="svc-intro">
     <div class="container svc-intro-grid">
       <div class="svc-intro-media reveal">
@@ -52,7 +53,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'deliver')): ?>
   <section class="svc-deliver light" id="svc-deliver">
     <div class="container">
       <div class="section-head-center reveal">
@@ -70,8 +73,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
-  <?php $svc_areas = zelora_service_repeater($post_id, 'areas_items'); ?>
+  <?php if (zelora_service_section_visible($post_id, 'areas')): $svc_areas = zelora_service_repeater($post_id, 'areas_items'); ?>
   <section class="svc-areas light" id="svc-areas">
     <div class="container svc-areas-grid">
       <div class="svc-area-list">
@@ -97,7 +101,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'why')): ?>
   <section class="svc-why" id="svc-why">
     <div class="wave svc-wave-top"><svg viewBox="0 0 1440 150" preserveAspectRatio="none">
         <path fill="#3c1721" d="M0 85 C150 12 285 118 455 66 C630 13 755 5 920 60 C1080 115 1260 151 1440 46 L1440 0 L0 0Z" />
@@ -116,7 +122,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'process')): ?>
   <section class="svc-process light" id="svc-process">
     <div class="container">
       <div class="section-head-center reveal">
@@ -134,7 +142,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'growth')): ?>
   <section class="svc-growth" id="svc-growth">
     <div class="container svc-growth-grid">
       <div class="svc-growth-copy reveal">
@@ -147,11 +157,14 @@ if (have_posts()):
         </div>
       </div>
       <div class="svc-growth-visual reveal">
+        <img src="<?php echo esc_url(zelora_service_image($post_id, 'growth_image')); ?>" alt="<?php echo esc_attr(zelora_service_field($post_id, 'growth_title')); ?>">
         <div class="svc-growth-badge"><i class="bi bi-graph-up-arrow"></i> <?php echo esc_html(zelora_service_field($post_id, 'growth_badge_text')); ?></div>
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'who')): ?>
   <section class="svc-who light" id="svc-who">
     <div class="container">
       <div class="section-head-center reveal">
@@ -165,7 +178,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'outcome')): ?>
   <section class="svc-outcome" id="svc-outcome">
     <div class="container reveal">
       <div class="eyebrow dark"><span></span> <?php echo esc_html(zelora_service_field($post_id, 'outcome_eyebrow')); ?></div>
@@ -177,7 +192,9 @@ if (have_posts()):
       </div>
     </div>
   </section>
+  <?php endif; ?>
 
+  <?php if (zelora_service_section_visible($post_id, 'cta')): ?>
   <section class="svc-cta section-dark" id="svc-cta">
     <div class="wave svc-wave-top"><svg viewBox="0 0 1440 150" preserveAspectRatio="none">
         <path fill="#3c1721" d="M0 85 C150 12 285 118 455 66 C630 13 755 5 920 60 C1080 115 1260 151 1440 46 L1440 0 L0 0Z" />
@@ -192,6 +209,7 @@ if (have_posts()):
         <b>→</b></a>
     </div>
   </section>
+  <?php endif; ?>
 
 </main>
 

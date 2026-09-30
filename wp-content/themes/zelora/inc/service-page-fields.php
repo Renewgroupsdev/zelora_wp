@@ -112,6 +112,7 @@ function zelora_service_image_defaults()
         'hero_image' => 'images/hero-dashboard.png',
         'intro_image' => 'images/about.png',
         'areas_image' => 'images/about_v2.png',
+        'growth_image' => 'images/growth-building.png',
     );
 }
 
@@ -162,6 +163,56 @@ function zelora_service_icon_class($icon)
     return $icon !== '' ? 'bi bi-' . sanitize_html_class($icon) : '';
 }
 
+/**
+ * Every toggleable section, keyed the same as its `_svc_hide_{key}` meta
+ * and (for list-driven sections) its repeater field, so a cleared list
+ * can auto-hide the section it belongs to.
+ */
+function zelora_service_sections()
+{
+    return array(
+        'intro' => array('label' => 'Intro row ("Build technology around…")', 'repeater' => null),
+        'deliver' => array('label' => 'What We Deliver', 'repeater' => 'deliver_cards'),
+        'areas' => array('label' => 'Business Areas We Can Digitize', 'repeater' => 'areas_items'),
+        'why' => array('label' => 'Why ERP Transformation Matters', 'repeater' => 'why_items'),
+        'process' => array('label' => 'Our ERP Development Approach', 'repeater' => 'process_steps'),
+        'growth' => array('label' => 'Built for Growth', 'repeater' => null),
+        'who' => array('label' => 'Who We Work With', 'repeater' => 'who_items'),
+        'outcome' => array('label' => 'Outcome', 'repeater' => null),
+        'cta' => array('label' => 'Closing CTA', 'repeater' => null),
+    );
+}
+
+/**
+ * True only when the field has actually been saved (at least once) with
+ * an empty value — i.e. the admin deliberately cleared it — as opposed to
+ * a fresh page that has never been saved through this meta box, which
+ * should still fall back to the sample content.
+ */
+function zelora_service_meta_is_explicitly_empty($post_id, $key)
+{
+    $meta_key = '_svc_' . $key;
+    if (!metadata_exists('post', $post_id, $meta_key)) {
+        return false;
+    }
+    return trim((string) get_post_meta($post_id, $meta_key, true)) === '';
+}
+
+function zelora_service_section_visible($post_id, $section_key)
+{
+    if (get_post_meta($post_id, '_svc_hide_' . $section_key, true) === '1') {
+        return false;
+    }
+
+    $sections = zelora_service_sections();
+    $repeater = isset($sections[$section_key]) ? $sections[$section_key]['repeater'] : null;
+    if ($repeater && zelora_service_meta_is_explicitly_empty($post_id, $repeater)) {
+        return false;
+    }
+
+    return true;
+}
+
 /* ---------------------------------------------------------------------- */
 /* Admin: meta box, assets, and save handling                              */
 /* ---------------------------------------------------------------------- */
@@ -187,6 +238,10 @@ function zelora_service_meta_box_html($post)
     </p>
     <div id="zelora-service-fields" <?php echo $current_template === 'service_page.php' ? '' : 'style="display:none"'; ?>>
 
+        <p class="description">
+            <?php esc_html_e('Every section below shows on the page by default. Use the switch on a section\'s heading to hide it — a list-based section (like "What We Deliver") also hides itself automatically if you clear all of its items and update the page.', 'zelora'); ?>
+        </p>
+
         <h3><?php esc_html_e('Hero', 'zelora'); ?></h3>
         <?php zelora_svc_text_row($post->ID, 'hero_eyebrow', 'Eyebrow'); ?>
         <?php zelora_svc_text_row($post->ID, 'hero_title', 'Title'); ?>
@@ -201,50 +256,51 @@ function zelora_service_meta_box_html($post)
             <?php zelora_svc_text_row($post->ID, 'hero_btn2_url', 'Secondary button link'); ?>
         </div>
 
-        <h3><?php esc_html_e('Intro row', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'intro', 'Intro row'); ?>
         <?php zelora_svc_text_row($post->ID, 'intro_title', 'Title'); ?>
         <?php zelora_svc_textarea_row($post->ID, 'intro_p1', 'Paragraph 1', 3); ?>
         <?php zelora_svc_textarea_row($post->ID, 'intro_p2', 'Paragraph 2', 3); ?>
         <?php zelora_svc_image_row($post->ID, 'intro_image', 'Image'); ?>
 
-        <h3><?php esc_html_e('What We Deliver', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'deliver', 'What We Deliver'); ?>
         <?php zelora_svc_text_row($post->ID, 'deliver_eyebrow', 'Eyebrow'); ?>
         <?php zelora_svc_text_row($post->ID, 'deliver_title', 'Heading'); ?>
         <?php zelora_svc_repeater_row($post->ID, 'deliver_cards', 'Cards', 'icon :: title :: description', 8); ?>
 
-        <h3><?php esc_html_e('Business Areas We Can Digitize', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'areas', 'Business Areas We Can Digitize'); ?>
         <?php zelora_svc_text_row($post->ID, 'areas_title', 'Heading'); ?>
         <?php zelora_svc_repeater_row($post->ID, 'areas_items', 'List items', 'icon :: title :: description', 8); ?>
         <?php zelora_svc_image_row($post->ID, 'areas_image', 'Image'); ?>
 
-        <h3><?php esc_html_e('Why ERP Transformation Matters', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'why', 'Why ERP Transformation Matters'); ?>
         <?php zelora_svc_text_row($post->ID, 'why_eyebrow', 'Eyebrow'); ?>
         <?php zelora_svc_text_row($post->ID, 'why_title', 'Heading'); ?>
         <?php zelora_svc_text_row($post->ID, 'why_intro', 'Subtext'); ?>
         <?php zelora_svc_repeater_row($post->ID, 'why_items', 'Items', 'icon :: label', 10); ?>
 
-        <h3><?php esc_html_e('Our ERP Development Approach', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'process', 'Our ERP Development Approach'); ?>
         <?php zelora_svc_text_row($post->ID, 'process_title', 'Heading'); ?>
         <?php zelora_svc_text_row($post->ID, 'process_intro', 'Subtext'); ?>
         <?php zelora_svc_repeater_row($post->ID, 'process_steps', 'Steps', 'icon :: title :: description', 8); ?>
 
-        <h3><?php esc_html_e('Built for Growth', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'growth', 'Built for Growth'); ?>
         <?php zelora_svc_text_row($post->ID, 'growth_title', 'Heading'); ?>
         <?php zelora_svc_textarea_row($post->ID, 'growth_desc', 'Description', 3); ?>
         <?php zelora_svc_repeater_row($post->ID, 'growth_pills', 'Pills', 'icon :: label', 6); ?>
+        <?php zelora_svc_image_row($post->ID, 'growth_image', 'Visual image'); ?>
         <?php zelora_svc_text_row($post->ID, 'growth_badge_text', 'Visual badge text'); ?>
 
-        <h3><?php esc_html_e('Who We Work With', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'who', 'Who We Work With'); ?>
         <?php zelora_svc_text_row($post->ID, 'who_eyebrow', 'Eyebrow'); ?>
         <?php zelora_svc_text_row($post->ID, 'who_title', 'Heading'); ?>
         <?php zelora_svc_repeater_row($post->ID, 'who_items', 'Items', 'icon :: label', 9); ?>
 
-        <h3><?php esc_html_e('Outcome', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'outcome', 'Outcome'); ?>
         <?php zelora_svc_text_row($post->ID, 'outcome_eyebrow', 'Eyebrow'); ?>
         <?php zelora_svc_text_row($post->ID, 'outcome_title', 'Heading'); ?>
         <?php zelora_svc_repeater_row($post->ID, 'outcome_tags', 'Tag lines', 'one per line', 4); ?>
 
-        <h3><?php esc_html_e('Closing CTA', 'zelora'); ?></h3>
+        <?php zelora_svc_section_heading($post->ID, 'cta', 'Closing CTA'); ?>
         <?php zelora_svc_text_row($post->ID, 'cta_title', 'Heading'); ?>
         <?php zelora_svc_textarea_row($post->ID, 'cta_desc', 'Description', 2); ?>
         <div class="svc-field-cols">
@@ -281,7 +337,35 @@ function zelora_service_meta_box_html($post)
         #zelora_service_fields .svc-image-preview { width: 90px; height: 60px; object-fit: cover; border: 1px solid #dcdcde; border-radius: 4px; background: #f0f0f1 }
         #zelora_service_fields h3 { margin: 28px 0 14px; padding-top: 18px; border-top: 1px solid #dcdcde }
         #zelora_service_fields h3:first-of-type { margin-top: 0; padding-top: 0; border-top: 0 }
+        #zelora_service_fields h3.svc-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px }
+        #zelora_service_fields .svc-toggle-switch { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 600; color: #646970; cursor: pointer; user-select: none }
+        #zelora_service_fields .svc-toggle-switch input { position: absolute; opacity: 0; width: 1px; height: 1px }
+        #zelora_service_fields .svc-toggle-track { position: relative; width: 36px; height: 20px; border-radius: 999px; background: #ccc; transition: background .15s }
+        #zelora_service_fields .svc-toggle-track:before { content: ''; position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.3) }
+        #zelora_service_fields .svc-toggle-switch input:checked + .svc-toggle-track { background: #a04050 }
+        #zelora_service_fields .svc-toggle-switch input:checked + .svc-toggle-track:before { transform: translateX(16px) }
+        #zelora_service_fields .svc-toggle-switch input:focus-visible + .svc-toggle-track { outline: 2px solid #2271b1; outline-offset: 2px }
+        #zelora_service_fields h3.svc-section-heading.is-hidden { opacity: .55 }
     </style>
+    <?php
+}
+
+/**
+ * A section's <h3> heading with a show/hide switch built in, so toggling
+ * a section lives right next to the fields it controls.
+ */
+function zelora_svc_section_heading($post_id, $section_key, $label)
+{
+    $hidden = get_post_meta($post_id, '_svc_hide_' . $section_key, true) === '1';
+    ?>
+    <h3 class="svc-section-heading<?php echo $hidden ? ' is-hidden' : ''; ?>">
+        <span><?php echo esc_html($label); ?></span>
+        <label class="svc-toggle-switch">
+            <input type="checkbox" name="svc_show_<?php echo esc_attr($section_key); ?>" value="1" <?php checked(!$hidden); ?>>
+            <span class="svc-toggle-track" aria-hidden="true"></span>
+            <span class="svc-toggle-label"><?php echo $hidden ? esc_html__('Hidden', 'zelora') : esc_html__('Visible', 'zelora'); ?></span>
+        </label>
+    </h3>
     <?php
 }
 
@@ -410,11 +494,17 @@ add_action('save_post_page', function ($post_id) {
         update_post_meta($post_id, '_svc_hero_desc', wp_kses_post(wp_unslash($_POST['svc_hero_desc'])));
     }
 
-    $image_fields = array('hero_image', 'intro_image', 'areas_image');
+    $image_fields = array('hero_image', 'intro_image', 'areas_image', 'growth_image');
     foreach ($image_fields as $field) {
         if (isset($_POST['svc_' . $field])) {
             update_post_meta($post_id, '_svc_' . $field, absint($_POST['svc_' . $field]));
         }
+    }
+
+    // Unchecked checkboxes aren't submitted at all, so their absence means "hidden".
+    foreach (array_keys(zelora_service_sections()) as $section_key) {
+        $hidden = !isset($_POST['svc_show_' . $section_key]);
+        update_post_meta($post_id, '_svc_hide_' . $section_key, $hidden ? '1' : '0');
     }
 });
 

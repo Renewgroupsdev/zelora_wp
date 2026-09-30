@@ -34,6 +34,14 @@
         $(this).hide();
     });
 
+    // Reflect each section's show/hide switch state live (label text + dimmed heading).
+    $(document).on('change', '.svc-toggle-switch input[type="checkbox"]', function () {
+        var $heading = $(this).closest('.svc-section-heading');
+        var visible = this.checked;
+        $heading.toggleClass('is-hidden', !visible);
+        $heading.find('.svc-toggle-label').text(visible ? 'Visible' : 'Hidden');
+    });
+
     // Show/hide the meta box content based on the currently selected page template,
     // so editors only see these fields when "Service Page" is selected.
     function toggleFieldsForTemplate(template) {

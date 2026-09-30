@@ -135,51 +135,51 @@
         <p><?php echo wp_kses_post(zelora_mod('services_intro')); ?></p>
       </div>
       <div class="service-scroller" data-touch-scroll>
-        <div class="service-card reveal">
+        <a class="service-card reveal" href="<?php echo esc_url(zelora_url('service1_url', '#contact')); ?>">
           <div class="card-media card-erp"><img
               src="<?php echo esc_url(zelora_image('service1_image', 'images/erp-development.png')); ?>"
               alt="<?php echo wp_kses_post(zelora_mod('service1_title')); ?> illustration"></div>
           <div class="service-icon icon-1"><i class="bi bi-diagram-3"></i></div>
           <h3>ERP Development</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service1_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service1_url', '#contact')); ?>">Learn more
-            <span>→</span></a>
-        </div>
-        <div class="service-card reveal">
+          <p><?php echo wp_kses_post(zelora_mod('service1_desc')); ?></p>
+          <span class="service-link">Learn more <span>→</span></span>
+        </a>
+        <a class="service-card reveal" href="<?php echo esc_url(zelora_url('service2_url', '#contact')); ?>">
           <div class="card-media card-mobile"><img
               src="<?php echo esc_url(zelora_image('service2_image', 'images/mobile-apps.png')); ?>"
               alt="Mobile Apps illustration"></div>
           <div class="service-icon icon-2"><i class="bi bi-phone"></i></div>
           <h3>Mobile Apps</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service2_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service2_url', '#contact')); ?>">Learn more
-            <span>→</span></a>
-        </div>
-        <div class="service-card reveal">
+          <p><?php echo wp_kses_post(zelora_mod('service2_desc')); ?></p>
+          <span class="service-link">Learn more <span>→</span></span>
+        </a>
+        <a class="service-card reveal" href="<?php echo esc_url(zelora_url('service3_url', '#contact')); ?>">
           <div class="card-media card-ai"><img
               src="<?php echo esc_url(zelora_image('service3_image', 'images/ai-integration.png')); ?>"
               alt="<?php echo wp_kses_post(zelora_mod('service3_title')); ?> illustration"></div>
           <div class="service-icon icon-3"><i class="bi bi-cpu"></i></div>
           <h3>AI Integration</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service3_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service3_url', '#contact')); ?>">Learn more
-            <span>→</span></a>
-        </div>
-        <div class="service-card reveal">
+          <p><?php echo wp_kses_post(zelora_mod('service3_desc')); ?></p>
+          <span class="service-link">Learn more <span>→</span></span>
+        </a>
+        <a class="service-card reveal" href="<?php echo esc_url(zelora_url('service4_url', '#contact')); ?>">
           <div class="card-media card-growth"><img
               src="<?php echo esc_url(zelora_image('service4_image', 'images/business-growth.png')); ?>"
               alt="Business Consulting illustration"></div>
           <div class="service-icon icon-4"><i class="bi bi-graph-up-arrow"></i></div>
           <h3>Business Consulting</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service4_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service4_url', '#contact')); ?>">Learn more
-            <span>→</span></a>
-        </div>
-        <div class="service-card reveal">
+          <p><?php echo wp_kses_post(zelora_mod('service4_desc')); ?></p>
+          <span class="service-link">Learn more <span>→</span></span>
+        </a>
+        <a class="service-card reveal" href="<?php echo esc_url(zelora_url('service5_url', '#contact')); ?>">
           <div class="card-media card-auto"><img
               src="<?php echo esc_url(zelora_image('service5_image', 'images/industry-automation.png')); ?>"
               alt="<?php echo wp_kses_post(zelora_mod('service5_title')); ?> illustration"></div>
           <div class="service-icon icon-5"><i class="bi bi-gear"></i></div>
           <h3>Industry Automation</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service5_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service5_url', '#contact')); ?>">Learn more
-            <span>→</span></a>
-        </div>
+          <p><?php echo wp_kses_post(zelora_mod('service5_desc')); ?></p>
+          <span class="service-link">Learn more <span>→</span></span>
+        </a>
       </div>
       <div class="touch-hint">← drag on touch →</div>
     </div>
