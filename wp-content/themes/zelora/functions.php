@@ -2,9 +2,15 @@
 if (!defined('ABSPATH'))
     exit;
 define('ZELORA_VERSION', '1.0.0');
+require_once get_template_directory() . '/inc/service-page-fields.php';
 function zelora_asset($p = '')
 {
     return trailingslashit(get_template_directory_uri()) . 'assets/' . ltrim($p, '/');
+}
+function zelora_asset_version($p = '')
+{
+    $file = get_template_directory() . '/assets/' . ltrim($p, '/');
+    return file_exists($file) ? (string) filemtime($file) : ZELORA_VERSION;
 }
 function zelora_defaults()
 {
@@ -57,7 +63,7 @@ function zelora_defaults()
         'office_address' => "1/198-3-3, Kurinji Malar St,\nMeenakshi Amman Nagar,\nLandmark - backside of Don Bosco School,\nSurya Nagar,\nMadurai, Tamil Nadu 625017",
         'footnote' => 'Part of Renew Group of Companies. Enquiries are read by the delivery team, not a call centre.',
         'form_button' => 'Send message',
-        'form_note' => 'We’ll get back to you within 1–2 business days. No spam, just a real conversation.',
+        'form_note' => 'We’ll get back to you shortly with a solution.',
         'interest1' => 'ERP Development',
         'interest2' => 'Mobile Apps',
         'interest3' => 'AI Integration',
@@ -181,9 +187,15 @@ function zelora_assets()
     wp_enqueue_style('zelora-fonts', zelora_asset('css/fonts.css'), array(), '1.0');
     wp_enqueue_style('zelora-gradient', zelora_asset('css/style_gradiant.css'), array('zelora-fonts'), ZELORA_VERSION);
     wp_enqueue_style('zelora-theme', get_stylesheet_uri(), array('zelora-gradient'), ZELORA_VERSION);
+    if (is_page_template('service_page.php')) {
+        wp_enqueue_style('zelora-service-page', zelora_asset('css/service-page.css'), array('zelora-theme'), zelora_asset_version('css/service-page.css'));
+    }
     wp_enqueue_script('zelora-jquery', zelora_asset('js/jquery-3.7.1.min.js'), array(), '3.7.1', true);
-    wp_enqueue_script('zelora-script', zelora_asset('js/script.js'), array('zelora-jquery'), ZELORA_VERSION, true);
+    wp_enqueue_script('zelora-script', zelora_asset('js/script.js'), array('zelora-jquery'), zelora_asset_version('js/script.js'), true);
     wp_localize_script('zelora-script', 'ZeloraTheme', array('ajaxUrl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('zelora_contact_nonce'), 'assetUrl' => trailingslashit(zelora_asset(''))));
+    if (is_page_template('service_page.php')) {
+        wp_enqueue_script('zelora-service-page', zelora_asset('js/service-page.js'), array('zelora-jquery'), zelora_asset_version('js/service-page.js'), true);
+    }
 }
 add_action('wp_enqueue_scripts', 'zelora_assets');
 function zelora_primary_fallback()

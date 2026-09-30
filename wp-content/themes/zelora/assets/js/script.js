@@ -190,7 +190,6 @@ $(function(){
          * Clear previous message
          */
         $message
-            .hide()
             .removeClass('success error')
             .html('');
 
@@ -245,6 +244,19 @@ $(function(){
                      * Reset form
                      */
                     $form[0].reset();
+
+                    /*
+                     * If this form lives inside a popup (e.g. the service
+                     * page contact modal), close it a moment after success.
+                     */
+                    const $modal = $form.closest('.svc-modal');
+
+                    if ($modal.length) {
+                        setTimeout(function () {
+                            $modal.removeClass('is-open').attr('aria-hidden', 'true');
+                            $('body').removeClass('modal-open');
+                        }, 2200);
+                    }
 
                 } else {
 

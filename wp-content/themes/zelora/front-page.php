@@ -141,7 +141,7 @@
               alt="<?php echo wp_kses_post(zelora_mod('service1_title')); ?> illustration"></div>
           <div class="service-icon icon-1"><i class="bi bi-diagram-3"></i></div>
           <h3>ERP Development</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service1_desc')); ?></p><a href="#contact">Learn more
+          <p><?php echo wp_kses_post(zelora_mod('service1_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service1_url', '#contact')); ?>">Learn more
             <span>→</span></a>
         </div>
         <div class="service-card reveal">
@@ -150,7 +150,7 @@
               alt="Mobile Apps illustration"></div>
           <div class="service-icon icon-2"><i class="bi bi-phone"></i></div>
           <h3>Mobile Apps</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service2_desc')); ?></p><a href="#contact">Learn more
+          <p><?php echo wp_kses_post(zelora_mod('service2_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service2_url', '#contact')); ?>">Learn more
             <span>→</span></a>
         </div>
         <div class="service-card reveal">
@@ -159,7 +159,7 @@
               alt="<?php echo wp_kses_post(zelora_mod('service3_title')); ?> illustration"></div>
           <div class="service-icon icon-3"><i class="bi bi-cpu"></i></div>
           <h3>AI Integration</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service3_desc')); ?></p><a href="#contact">Learn more
+          <p><?php echo wp_kses_post(zelora_mod('service3_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service3_url', '#contact')); ?>">Learn more
             <span>→</span></a>
         </div>
         <div class="service-card reveal">
@@ -168,7 +168,7 @@
               alt="Business Consulting illustration"></div>
           <div class="service-icon icon-4"><i class="bi bi-graph-up-arrow"></i></div>
           <h3>Business Consulting</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service4_desc')); ?></p><a href="#contact">Learn more
+          <p><?php echo wp_kses_post(zelora_mod('service4_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service4_url', '#contact')); ?>">Learn more
             <span>→</span></a>
         </div>
         <div class="service-card reveal">
@@ -177,7 +177,7 @@
               alt="<?php echo wp_kses_post(zelora_mod('service5_title')); ?> illustration"></div>
           <div class="service-icon icon-5"><i class="bi bi-gear"></i></div>
           <h3>Industry Automation</h3>
-          <p><?php echo wp_kses_post(zelora_mod('service5_desc')); ?></p><a href="#contact">Learn more
+          <p><?php echo wp_kses_post(zelora_mod('service5_desc')); ?></p><a href="<?php echo esc_url(zelora_url('service5_url', '#contact')); ?>">Learn more
             <span>→</span></a>
         </div>
       </div>
@@ -365,7 +365,7 @@
 
         <div class="row">
             <label>
-                Work email*
+                Email*
                 <input
                     required
                     type="email"
@@ -437,9 +437,9 @@
             style="display:none;"
         ></div>
 
-        <small>
+        <!-- <small>
             <?php echo wp_kses_post(zelora_mod('form_note')); ?>
-        </small>
+        </small> -->
 
     </form>
       <!-- <form class="contact-card reveal" id="contactForm"><input type="hidden" name="nonce"
