@@ -3,6 +3,7 @@ if (!defined('ABSPATH'))
     exit;
 define('ZELORA_VERSION', '1.0.0');
 require_once get_template_directory() . '/inc/service-page-fields.php';
+require_once get_template_directory() . '/inc/enquiries.php';
 function zelora_asset($p = '')
 {
     return trailingslashit(get_template_directory_uri()) . 'assets/' . ltrim($p, '/');
@@ -402,6 +403,24 @@ function zelora_contact_submit()
     $subject = 'New Website Enquiry for '. $interest .' - Zelora Infotech';
 
 
+    /*
+     * Store the enquiry (and the exact email that will be sent) so it can
+     * be reviewed from wp-admin under Enquiries, even if the email below
+     * fails to send.
+     */
+    zelora_save_enquiry(array(
+        'name' => $name,
+        'company' => $company,
+        'email' => $email,
+        'phone' => $phone,
+        'interest' => $interest,
+        'message' => $message,
+        'email_subject' => $subject,
+        'email_to' => $to,
+        'email_body' => $body,
+    ));
+
+
 //     /*
 //      * Email body
 //      */
@@ -695,6 +714,8 @@ function zelora_customizer($c)
         $add($k, $l, $type, 'about');
     }
 
+    $add('about_image', 'About image', 'image', 'about');
+
 
     /*
      * ---------------------------------------------------------
@@ -894,7 +915,6 @@ function zelora_customizer($c)
         'header_logo' => 'Header logo',
         'footer_logo' => 'Footer logo',
         'hero_image' => 'Hero image',
-        'about_image' => 'About image',
         'favicon' => 'Favicon',
     );
 

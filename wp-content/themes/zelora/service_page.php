@@ -15,29 +15,21 @@ if (have_posts()):
         ?>
 <main class="svc-page">
 
-  <section class="hero-x svc-hero section-dark" id="svc-hero">
-    <div class="grid-noise"></div>
-    <div class="hero-vignette"></div>
-    <div class="hero-orbit hero-orbit-1"></div>
-    <div class="hero-orbit hero-orbit-2"></div>
+  <section class="hero-x svc-hero svc-hero-light" id="svc-hero">
     <div class="container hero-x-grid">
       <div class="hero-x-copy reveal">
-        <div class="eyebrow"><span></span> <?php echo esc_html(zelora_service_field($post_id, 'hero_eyebrow')); ?></div>
+        <div class="eyebrow dark"><span></span> <?php echo esc_html(zelora_service_field($post_id, 'hero_eyebrow')); ?></div>
         <h1><?php echo esc_html(zelora_service_field($post_id, 'hero_title')); ?></h1>
-        <p><?php echo esc_html(zelora_service_field($post_id, 'hero_desc')); ?></p>
+        <p><?php echo wp_kses_post(zelora_service_field($post_id, 'hero_desc')); ?></p>
         <div class="hero-buttons">
           <a href="#svc-contact-modal" class="btn btn-gold magnetic js-open-contact-modal"
             data-modal-target="svc-contact-modal"><?php echo esc_html(zelora_service_field($post_id, 'hero_btn1_text')); ?> <b>→</b></a>
           <a href="<?php echo esc_url(zelora_service_field($post_id, 'hero_btn2_url')); ?>"
-            class="btn btn-outline"><?php echo esc_html(zelora_service_field($post_id, 'hero_btn2_text')); ?></a>
+            class="btn btn-outline-light"><?php echo esc_html(zelora_service_field($post_id, 'hero_btn2_text')); ?></a>
         </div>
       </div>
       <div class="hero-x-art reveal" data-parallax-wrap>
-        <div class="art-orbit-path"></div>
-        <div class="floating-cube cube-1"></div>
-        <div class="floating-cube cube-2"></div>
-        <div class="floating-cube cube-3"></div>
-        <div class="hero-dashboard" data-depth="30" data-tilt-card>
+        <div class="hero-dashboard svc-hero-dashboard" data-depth="20" data-tilt-card>
           <img src="<?php echo esc_url(zelora_service_image($post_id, 'hero_image')); ?>" alt="<?php echo esc_attr(get_the_title($post_id)); ?> preview">
         </div>
         <div class="screen-glow"></div>

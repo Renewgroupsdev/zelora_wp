@@ -12,8 +12,39 @@
 .svc-wave-bottom { bottom: -1px; height: 90px }
 
 /* -------------------------------- hero ----------------------------------- */
-.svc-hero { min-height: auto; padding: 150px 0 130px }
+.svc-hero { min-height: auto; padding: 150px 0 110px }
 .svc-hero .hero-x-copy > p { max-width: 520px }
+
+.svc-hero-light {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(158deg, #fdf1f4 0%, #f9e6ea 55%, #f3d9df 100%);
+    color: var(--ink)
+}
+
+.svc-hero-light:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 84% 18%, #ffffffb3, transparent 42%), radial-gradient(circle at 8% 88%, #dfa2b155, transparent 40%);
+    pointer-events: none
+}
+
+.svc-hero-light .hero-x-copy h1 { color: var(--ink) }
+.svc-hero-light .hero-x-copy > p { color: var(--muted) }
+
+.svc-hero-light .hero-x-copy > p mark {
+    background: linear-gradient(180deg, transparent 62%, #f0c4cf 62%);
+    color: var(--ink);
+    font-weight: 700;
+    padding: 0 1px
+}
+.svc-hero-light .wave path { fill: #fff }
+
+.svc-hero-dashboard {
+    box-shadow: 0 30px 70px #5f323e22;
+    border: 1px solid #ffffffb0
+}
 
 .btn-outline {
     background: transparent;
@@ -22,6 +53,14 @@
 }
 
 .btn-outline:hover { background: #ffffff12 }
+
+.btn-outline-light {
+    background: #fff;
+    border: 1.5px solid #dfb3bd;
+    color: var(--navy)
+}
+
+.btn-outline-light:hover { background: #fdf1f4 }
 
 /* ------------------------------ intro row -------------------------------- */
 .svc-intro { padding: 110px 0; overflow: hidden }
@@ -295,21 +334,31 @@
     border-radius: 22px;
     overflow: hidden;
     min-height: 360px;
-    background: linear-gradient(160deg, #2a1a2e, #16213e 55%, #0a1230);
+    background: linear-gradient(165deg, #d8e6f2 0%, #a9c1d9 55%, #7e9cbf 100%);
     display: flex;
     align-items: flex-end;
     padding: 26px
+}
+
+.svc-growth-visual:after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(90deg, #ffffff26 0 34px, transparent 34px 62px);
+    -webkit-mask-image: linear-gradient(180deg, transparent 8%, #000 55%);
+    mask-image: linear-gradient(180deg, transparent 8%, #000 55%)
 }
 
 .svc-growth-visual:before {
     content: '\f673';
     font-family: bootstrap-icons !important;
     position: absolute;
-    right: -30px;
-    bottom: -40px;
-    font-size: 260px;
-    color: #ffffff0d;
-    line-height: 1
+    right: -20px;
+    top: 24px;
+    font-size: 150px;
+    color: #ffffffa0;
+    line-height: 1;
+    z-index: 1
 }
 
 .svc-growth-badge {

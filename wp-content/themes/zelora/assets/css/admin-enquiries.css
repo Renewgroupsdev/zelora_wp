@@ -1,0 +1,83 @@
+.zelora-view-email {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0 !important;
+}
+
+.zelora-email-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s ease, visibility 0s linear .2s;
+}
+
+.zelora-email-modal.is-open {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity .2s ease, visibility 0s;
+}
+
+.zelora-email-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(20, 8, 14, .6);
+}
+
+.zelora-email-modal-panel {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 720px;
+    max-height: 88vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 8px;
+    padding: 26px;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, .3);
+}
+
+.zelora-email-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    background: #f0f0f1;
+    border: 1px solid #dcdcde;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.zelora-email-modal-close:hover { background: #e0e0e0; }
+
+.zelora-email-modal-subject {
+    margin: 0 40px 4px 0;
+    font-size: 18px;
+}
+
+.zelora-email-modal-to {
+    margin: 0 0 16px;
+    color: #646970;
+    font-size: 13px;
+}
+
+.zelora-email-modal-iframe {
+    width: 100%;
+    height: 65vh;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    background: #fff;
+}

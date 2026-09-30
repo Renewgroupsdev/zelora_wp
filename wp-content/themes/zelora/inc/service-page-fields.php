@@ -14,7 +14,7 @@ function zelora_service_defaults()
     return array(
         'hero_eyebrow' => 'ERP DEVELOPMENT',
         'hero_title' => 'Build a stronger operational foundation.',
-        'hero_desc' => "Your business runs on processes, people, and information. When those elements operate across disconnected systems, spreadsheets and manual workflows, growth becomes harder to manage. Zelora builds business-focused ERP solutions that bring your core operations together, giving teams a connected platform to manage information, streamline workflows, and make better decisions.",
+        'hero_desc' => "Your business runs on processes, people, and information. When those elements operate across disconnected systems, spreadsheets and manual workflows, growth becomes harder to manage. <mark>Zelora builds business-focused ERP solutions that bring your core operations together</mark>, giving teams a connected platform to manage information, streamline workflows, and make better decisions.",
         'hero_btn1_text' => 'Start a Conversation',
         'hero_btn1_url' => '#svc-cta',
         'hero_btn2_text' => 'Explore Our Approach',
@@ -190,7 +190,7 @@ function zelora_service_meta_box_html($post)
         <h3><?php esc_html_e('Hero', 'zelora'); ?></h3>
         <?php zelora_svc_text_row($post->ID, 'hero_eyebrow', 'Eyebrow'); ?>
         <?php zelora_svc_text_row($post->ID, 'hero_title', 'Title'); ?>
-        <?php zelora_svc_textarea_row($post->ID, 'hero_desc', 'Description', 3); ?>
+        <?php zelora_svc_textarea_row($post->ID, 'hero_desc', 'Description', 3, 'Wrap a sentence in <code>&lt;mark&gt;...&lt;/mark&gt;</code> to highlight it in rose.'); ?>
         <?php zelora_svc_image_row($post->ID, 'hero_image', 'Hero image'); ?>
         <div class="svc-field-cols">
             <?php zelora_svc_text_row($post->ID, 'hero_btn1_text', 'Primary button text'); ?>
@@ -318,7 +318,7 @@ function zelora_svc_select_row($post_id, $key, $label, $options, $description = 
     <?php
 }
 
-function zelora_svc_textarea_row($post_id, $key, $label, $rows = 3)
+function zelora_svc_textarea_row($post_id, $key, $label, $rows = 3, $description = '')
 {
     $value = zelora_service_field($post_id, $key);
     ?>
@@ -326,6 +326,9 @@ function zelora_svc_textarea_row($post_id, $key, $label, $rows = 3)
         <label for="svc_<?php echo esc_attr($key); ?>"><?php echo esc_html($label); ?></label>
         <textarea id="svc_<?php echo esc_attr($key); ?>" name="svc_<?php echo esc_attr($key); ?>"
             rows="<?php echo esc_attr($rows); ?>"><?php echo esc_textarea($value); ?></textarea>
+        <?php if ($description): ?>
+            <p class="description"><?php echo wp_kses_post($description); ?></p>
+        <?php endif; ?>
     </div>
     <?php
 }
@@ -392,13 +395,19 @@ add_action('save_post_page', function ($post_id) {
     }
 
     $textarea_fields = array(
-        'hero_desc', 'intro_p1', 'intro_p2', 'why_intro', 'process_intro', 'growth_desc', 'cta_desc',
+        'intro_p1', 'intro_p2', 'why_intro', 'process_intro', 'growth_desc', 'cta_desc',
         'deliver_cards', 'areas_items', 'why_items', 'process_steps', 'growth_pills', 'who_items', 'outcome_tags',
     );
     foreach ($textarea_fields as $field) {
         if (isset($_POST['svc_' . $field])) {
             update_post_meta($post_id, '_svc_' . $field, sanitize_textarea_field(wp_unslash($_POST['svc_' . $field])));
         }
+    }
+
+    // Allows a limited set of inline tags (e.g. <mark>) so a sentence in the
+    // hero description can be highlighted.
+    if (isset($_POST['svc_hero_desc'])) {
+        update_post_meta($post_id, '_svc_hero_desc', wp_kses_post(wp_unslash($_POST['svc_hero_desc'])));
     }
 
     $image_fields = array('hero_image', 'intro_image', 'areas_image');
