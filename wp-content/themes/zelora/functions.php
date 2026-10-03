@@ -59,7 +59,7 @@ function zelora_defaults()
         'email' => 'info@zelorainfotech.com',
         'phone' => '+91 99945 131592',
         'whatsapp_text' => 'Message us on WhatsApp',
-        'whatsapp_url' => '#',
+        'whatsapp_url' => '',
         'company' => 'Zelora Infotech Private Limited',
         'office_address' => "1/198-3-3, Kurinji Malar St,\nMeenakshi Amman Nagar,\nLandmark - backside of Don Bosco School,\nSurya Nagar,\nMadurai, Tamil Nadu 625017",
         'footnote' => 'Part of Renew Group of Companies. Enquiries are read by the delivery team, not a call centre.',
@@ -132,7 +132,7 @@ function zelora_mod($k, $default = '')
 function zelora_url($k, $default = '#')
 {
     $v = get_theme_mod('zelora_' . $k, '');
-    return $v !== '' ? esc_url($v) : esc_url($default);
+    return ($v !== '' && $v !== '#') ? esc_url($v) : esc_url($default);
 }
 // function zelora_image($k, $default = '')
 // {
@@ -179,7 +179,7 @@ function zelora_setup()
     add_theme_support('post-thumbnails');
     add_theme_support('custom-logo');
     add_theme_support('html5', array('search-form', 'gallery', 'caption', 'style', 'script'));
-    register_nav_menus(array('primary' => __('Primary Menu', 'zelora'), 'footer' => __('Footer Menu', 'zelora')));
+    register_nav_menus(array('primary' => __('Primary Menu', 'zelora'), 'footer' => __('Footer Menu', 'zelora'), 'service' => __('Service Page Menu', 'zelora')));
 }
 add_action('after_setup_theme', 'zelora_setup');
 function zelora_assets()
@@ -215,11 +215,22 @@ function zelora_footer_fallback()
 }
 function zelora_menu_attrs($atts, $item, $args)
 {
-    if (isset($args->theme_location) && in_array($args->theme_location, array('primary', 'footer'), true))
+    if (isset($args->theme_location) && in_array($args->theme_location, array('primary', 'footer', 'service'), true))
         $atts['class'] = 'nav-link';
     return $atts;
 }
 add_filter('nav_menu_link_attributes', 'zelora_menu_attrs', 10, 3);
+// Anchor links in the service menu ("#about" or "https://host#about") should point at the site's home page.
+function zelora_menu_anchor_urls($atts, $item, $args)
+{
+    if (isset($args->theme_location) && $args->theme_location === 'service' && !empty($atts['href']) && preg_match('/#([\w-]+)$/', $atts['href'], $m)) {
+        $base = preg_replace('#^https?://#', '', rtrim(strtok($atts['href'], '#'), '/'));
+        if ($atts['href'][0] === '#' || $base === preg_replace('#^https?://#', '', untrailingslashit(home_url())))
+            $atts['href'] = home_url('/') . '#' . $m[1];
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'zelora_menu_anchor_urls', 11, 3);
 
 function zelora_load_email_template($template, $data = array())
 {

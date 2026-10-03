@@ -327,7 +327,8 @@
           </div>
           <div class="contact-line">
             <i class="bi bi-whatsapp contact-icon" aria-hidden="true"></i>
-            <a href="#"><?php echo wp_kses_post(zelora_mod('whatsapp_text')); ?></a>
+            <a href="<?php echo esc_url(zelora_url('whatsapp_url', 'https://wa.me/' . preg_replace('/\D/', '', zelora_mod('phone')))); ?>"
+              target="_blank"><?php echo wp_kses_post(zelora_mod('whatsapp_text')); ?></a>
           </div>
           <!-- <div class="contact-line">
             <span class="contact-label">Company</span>

@@ -32,7 +32,11 @@ if (!defined('ABSPATH'))
             <span class="brand-copy"><b>ZELORA</b><small><?php echo esc_html(zelora_mod('site_tagline')); ?></small></span>
         </a> -->
         <nav class="main-nav" aria-label="Primary navigation">
-            <?php wp_nav_menu(array('theme_location' => 'primary', 'container' => false, 'menu_class' => 'wp-primary-menu', 'fallback_cb' => 'zelora_primary_fallback')); ?>
+            <?php
+            // Service Page template uses its own menu (falls back to the primary one if none is assigned).
+            $zelora_menu_location = (is_page_template('service_page.php') && has_nav_menu('service')) ? 'service' : 'primary';
+            wp_nav_menu(array('theme_location' => $zelora_menu_location, 'container' => false, 'menu_class' => 'wp-primary-menu', 'depth' => 2, 'fallback_cb' => 'zelora_primary_fallback'));
+            ?>
         </nav>
         <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><i></i><i></i></button>
     </header>
